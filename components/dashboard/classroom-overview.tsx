@@ -32,25 +32,43 @@ export function ClassroomOverview({ filters }: ClassroomOverviewProps) {
     }
   }
 
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case "alert":
+        return "Riesgo Alto"
+      case "warning":
+        return "Riesgo Medio"
+      default:
+        return "Normal"
+    }
+  }
+
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">
-        Resumen de Estudiantes - {filters.level.charAt(0).toUpperCase() + filters.level.slice(1)} {filters.grade}°
-        Sección {filters.section}
+    <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
+        <span className="block sm:inline">Resumen de Estudiantes - </span>
+        <span className="block sm:inline mt-1 sm:mt-0">
+          {filters.level.charAt(0).toUpperCase() + filters.level.slice(1)} {filters.grade}°
+          Sección {filters.section}
+        </span>
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {students.map((student) => (
           <div
             key={student.id}
-            className="p-4 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-slate-500 transition"
+            className="p-3 sm:p-4 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-slate-500 transition-colors"
           >
-            <div className="flex items-start justify-between mb-2">
-              <p className="font-medium text-white">{student.name}</p>
-              <Badge className={`${getStatusColor(student.status)} border`}>
-                {student.status === "alert" ? "Riesgo Alto" : student.status === "warning" ? "Riesgo Medio" : "Normal"}
+            <div className="flex items-start justify-between mb-2 gap-2">
+              <p className="font-medium text-white text-sm sm:text-base flex-1 min-w-0 truncate">
+                {student.name}
+              </p>
+              <Badge className={`${getStatusColor(student.status)} border text-xs flex-shrink-0`}>
+                {getStatusLabel(student.status)}
               </Badge>
             </div>
-            <p className="text-sm text-slate-400">Interacciones: {student.interactions}</p>
+            <p className="text-xs sm:text-sm text-slate-400">
+              Interacciones: <span className="font-semibold">{student.interactions}</span>
+            </p>
           </div>
         ))}
       </div>

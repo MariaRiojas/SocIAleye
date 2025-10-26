@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Menu, X, LogOut, Map, AlertTriangle, Home, Settings, Calendar } from "lucide-react"
@@ -10,8 +10,14 @@ import Link from "next/link"
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const pathname = usePathname()
   const { user, logout } = useAuth()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // Cerrar sidebar al cambiar de ruta en móvil
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [pathname])
 
   const handleLogout = () => {
     logout()
@@ -81,63 +87,117 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const isActiveRoute = (href: string) => {
+    return pathname === href
+  }
+
   return (
-    <div className="min-h-screen bg-slate-900 flex">
+    <div className="min-h-screen bg-slate-900">
+      {/* Overlay para móvil */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar - Solo iconos colapsado, expandible en móvil */}
       <aside
-        className={`fixed left-0 top-0 h-screen bg-slate-800 border-r border-slate-700 transition-all duration-300 z-40 ${
-          sidebarOpen ? "w-64" : "w-20"
-        } md:relative md:translate-x-0 ${!sidebarOpen && "md:w-20"}`}
+        className={`
+          fixed left-0 top-0 h-screen bg-slate-800 border-r border-slate-700 
+          transition-all duration-300 z-50 flex flex-col
+          ${sidebarOpen ? "w-64" : "w-16"}
+        `}
       >
-        <div className="p-3 sm:p-4 border-b border-slate-700 flex items-center justify-between">
-          {sidebarOpen && (
-            <div className="flex items-center gap-2 min-w-0">
-              <div
-                className={`w-8 h-8 rounded-lg bg-gradient-to-br ${getRoleColor()} flex items-center justify-center flex-shrink-0`}
+        {/* Header del Sidebar */}
+        <div className="flex-shrink-0 p-3 border-b border-slate-700 flex items-center justify-between">
+          {sidebarOpen ? (
+            <>
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <div
+                  className={`w-8 h-8 rounded-lg bg-gradient-to-br ${getRoleColor()} flex items-center justify-center flex-shrink-0`}
+                >
+                  <span className="text-white font-bold text-sm">S</span>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="font-bold text-white block text-sm truncate">SocIAleye</span>
+                  <span className="text-xs text-slate-400 block truncate">{getRoleLabel()}</span>
+                </div>
+              </div>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="p-1.5 hover:bg-slate-700 rounded-lg transition-colors flex-shrink-0"
+                aria-label="Cerrar menú"
               >
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
-              <div className="min-w-0">
-                <span className="font-bold text-white block text-sm truncate">SocIAleye</span>
-                <span className="text-xs text-slate-400 truncate">{getRoleLabel()}</span>
-              </div>
-            </div>
+                <X className="w-5 h-5 text-slate-400" />
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="w-full p-2 hover:bg-slate-700 rounded-lg transition-colors"
+              aria-label="Abrir menú"
+            >
+              <Menu className="w-5 h-5 text-slate-400 mx-auto" />
+            </button>
           )}
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1 hover:bg-slate-700 rounded-lg transition flex-shrink-0"
-          >
-            {sidebarOpen ? <X className="w-5 h-5 text-slate-400" /> : <Menu className="w-5 h-5 text-slate-400" />}
-          </button>
         </div>
 
-        <nav className="p-2 sm:p-4 space-y-1 sm:space-y-2">
+        {/* Navegación - Scrollable */}
+        <nav className="flex-1 p-2 space-y-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-800">
           {getNavItems().map((item) => {
             const Icon = item.icon
+            const isActive = isActiveRoute(item.href)
             return (
               <Link key={item.href} href={item.href}>
-                <button className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg hover:bg-slate-700 transition text-slate-300 hover:text-white text-sm">
+                <button
+                  className={`
+                    w-full flex items-center gap-3 px-3 py-3 rounded-lg 
+                    transition-all duration-200 text-sm font-medium
+                    ${
+                      isActive
+                        ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                        : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                    }
+                    ${!sidebarOpen && "justify-center"}
+                  `}
+                  title={!sidebarOpen ? item.label : undefined}
+                >
                   <Icon className="w-5 h-5 flex-shrink-0" />
-                  {sidebarOpen && <span className="font-medium truncate">{item.label}</span>}
+                  {sidebarOpen && <span className="truncate">{item.label}</span>}
                 </button>
               </Link>
             )
           })}
         </nav>
 
-        <div className="absolute bottom-4 left-3 right-3 sm:left-4 sm:right-4">
+        {/* Botón de Logout - Fixed en la parte inferior */}
+        <div className="flex-shrink-0 p-3 border-t border-slate-700 bg-slate-800">
           <Button
             onClick={handleLogout}
             variant="outline"
-            className="w-full border-slate-600 text-slate-300 hover:bg-slate-700 bg-transparent text-sm"
+            className={`
+              w-full border-slate-600 text-slate-300 hover:bg-slate-700 
+              hover:text-white hover:border-slate-500 bg-transparent text-sm 
+              transition-colors
+              ${!sidebarOpen && "px-2"}
+            `}
+            title={!sidebarOpen ? "Cerrar Sesión" : undefined}
           >
             <LogOut className="w-4 h-4 flex-shrink-0" />
-            {sidebarOpen && <span className="ml-2">Cerrar Sesión</span>}
+            {sidebarOpen && <span className="ml-2 truncate">Cerrar Sesión</span>}
           </Button>
         </div>
       </aside>
 
-      <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? "md:ml-0" : "md:ml-0"}`}>
-        <div className="p-4 sm:p-6 md:p-8 w-full">{children}</div>
+      {/* Main Content */}
+      <main className="ml-16 min-h-screen">
+        <div className="h-screen overflow-y-auto">
+          <div className="p-4 sm:p-6 lg:p-8 w-full max-w-full">
+            {children}
+          </div>
+        </div>
       </main>
     </div>
   )

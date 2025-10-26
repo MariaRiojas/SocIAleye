@@ -44,17 +44,19 @@ export function DashboardStats({ filters }: DashboardStatsProps) {
   ]
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
       {stats.map((stat, i) => {
         const Icon = stat.icon
         return (
-          <Card key={i} className={`border-slate-700 bg-gradient-to-br ${stat.color} p-6`}>
+          <Card key={i} className={`border-slate-700 bg-gradient-to-br ${stat.color} p-4 sm:p-6`}>
             <div className="flex items-start justify-between">
-              <div>
-                <p className="text-slate-400 text-sm">{stat.label}</p>
-                <p className={`text-3xl font-bold mt-2 ${stat.textColor}`}>{stat.value}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-slate-400 text-xs sm:text-sm truncate">{stat.label}</p>
+                <p className={`text-2xl sm:text-3xl font-bold mt-1 sm:mt-2 ${stat.textColor}`}>
+                  {stat.value}
+                </p>
               </div>
-              <Icon className={`w-8 h-8 ${stat.textColor} opacity-50`} />
+              <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${stat.textColor} opacity-50 flex-shrink-0 ml-2`} />
             </div>
           </Card>
         )

@@ -21,20 +21,20 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
   const grades = filters.level === "primaria" ? primaryGrades : secondaryGrades
 
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-slate-300">Nivel</label>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full">
             {levels.map((level) => (
               <Button
                 key={level}
                 variant={filters.level === level ? "default" : "outline"}
                 size="sm"
                 onClick={() => onFiltersChange({ ...filters, level, grade: "1" })}
-                className={
+                className={`flex-1 ${
                   filters.level === level ? "bg-blue-600 hover:bg-blue-700" : "border-slate-600 text-slate-300"
-                }
+                }`}
               >
                 {level.charAt(0).toUpperCase() + level.slice(1)}
               </Button>
@@ -47,7 +47,7 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
           <select
             value={filters.grade}
             onChange={(e) => onFiltersChange({ ...filters, grade: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm"
+            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {grades.map((grade) => (
               <option key={grade} value={grade}>
@@ -62,7 +62,7 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
           <select
             value={filters.section}
             onChange={(e) => onFiltersChange({ ...filters, section: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm"
+            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {sections.map((section) => (
               <option key={section} value={section}>
@@ -73,7 +73,9 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
         </div>
 
         <div className="flex items-end">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700">Aplicar Filtros</Button>
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm sm:text-base">
+            Aplicar Filtros
+          </Button>
         </div>
       </div>
     </Card>

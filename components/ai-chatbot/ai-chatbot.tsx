@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { MessageCircle, X, Send } from "lucide-react"
-import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface Message {
   id: string
@@ -30,12 +29,45 @@ export function AIChatbot({ pageContext = "Dashboard general" }: AIChatbotProps)
   ])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
+
+  // Add custom scrollbar styles
+  useEffect(() => {
+    const style = document.createElement('style')
+    style.textContent = `
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(30, 41, 59, 0.5);
+        border-radius: 4px;
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #475569;
+        border-radius: 4px;
+        transition: background 0.2s ease;
+      }
+      
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+    `
+    document.head.appendChild(style)
+    
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" })
-    }
+    scrollToBottom()
   }, [messages])
 
   const generateResponse = (userMessage: string): string => {
@@ -135,7 +167,7 @@ export function AIChatbot({ pageContext = "Dashboard general" }: AIChatbotProps)
       {isOpen && (
         <Card className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-96 border-slate-700 bg-slate-800 shadow-2xl flex flex-col z-50 max-w-sm">
           {/* Header */}
-          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-slate-700">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-slate-700 flex-shrink-0">
             <div className="min-w-0 flex-1">
               <h3 className="font-semibold text-white text-sm sm:text-base truncate">Asistente SocIAleye</h3>
               <p className="text-xs text-slate-400 truncate">{pageContext}</p>
@@ -149,7 +181,14 @@ export function AIChatbot({ pageContext = "Dashboard general" }: AIChatbotProps)
           </div>
 
           {/* Messages */}
-          <ScrollArea className="flex-1 p-3 sm:p-4 space-y-4">
+          <div 
+            ref={messagesContainerRef}
+            className="custom-scrollbar flex-1 overflow-y-auto p-3 sm:p-4 space-y-4"
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: '#475569 rgba(30, 41, 59, 0.5)'
+            }}
+          >
             {messages.map((message) => (
               <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div
@@ -174,11 +213,11 @@ export function AIChatbot({ pageContext = "Dashboard general" }: AIChatbotProps)
                 </div>
               </div>
             )}
-            <div ref={scrollRef} />
-          </ScrollArea>
+            <div ref={messagesEndRef} />
+          </div>
 
           {/* Input */}
-          <div className="p-3 sm:p-4 border-t border-slate-700 flex gap-2">
+          <div className="p-3 sm:p-4 border-t border-slate-700 flex gap-2 flex-shrink-0">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
