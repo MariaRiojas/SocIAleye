@@ -106,7 +106,7 @@ export function SociometricMapVisualization({
     if (canvas2) drawCanvas(canvas2)
   }, [selectedStudent])
 
-  const handleCanvasClick = (canvasRefParam: React.RefObject<HTMLCanvasElement>) => (
+  const handleCanvasClick = (canvasRefParam: React.RefObject<HTMLCanvasElement | null>) => (
     e: React.MouseEvent<HTMLCanvasElement>
   ) => {
     const canvas = canvasRefParam.current
