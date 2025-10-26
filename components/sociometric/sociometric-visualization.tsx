@@ -21,6 +21,7 @@ export function SociometricMapVisualization({
   onSelectStudent,
 }: SociometricVisualizationProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef2 = useRef<HTMLCanvasElement>(null)
 
   // Datos simulados de estudiantes y sus relaciones
   const students = [
@@ -41,10 +42,8 @@ export function SociometricMapVisualization({
     { from: "6", to: "2", type: "negative" },
   ]
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
+  // Función para dibujar el canvas
+  const drawCanvas = (canvas: HTMLCanvasElement) => {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
@@ -97,10 +96,20 @@ export function SociometricMapVisualization({
       ctx.textBaseline = "middle"
       ctx.fillText(student.name, student.x, student.y)
     })
+  }
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const canvas2 = canvasRef2.current
+    
+    if (canvas) drawCanvas(canvas)
+    if (canvas2) drawCanvas(canvas2)
   }, [selectedStudent])
 
-  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
+  const handleCanvasClick = (canvasRefParam: React.RefObject<HTMLCanvasElement>) => (
+    e: React.MouseEvent<HTMLCanvasElement>
+  ) => {
+    const canvas = canvasRefParam.current
     if (!canvas) return
 
     const rect = canvas.getBoundingClientRect()
@@ -117,45 +126,87 @@ export function SociometricMapVisualization({
   }
 
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-6">
-      <h3 className="text-lg font-semibold text-white mb-4">Estructura Social del Aula</h3>
-      <div className="bg-slate-900 rounded-lg overflow-hidden">
-        <canvas
-          ref={canvasRef}
-          width={600}
-          height={400}
-          onClick={handleCanvasClick}
-          className="w-full cursor-pointer"
-        />
-      </div>
-      <div className="mt-4 flex gap-6 text-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-green-500" />
-          <span className="text-slate-300">Alta aceptación</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-yellow-500" />
-          <span className="text-slate-300">Aceptación media</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-red-500" />
-          <span className="text-slate-300">Baja aceptación</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-12 h-0.5 bg-green-500" />
-          <span className="text-slate-300">Relación positiva</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div
-            className="w-12 h-0.5 bg-red-500"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
-            }}
+    <>
+      <Card className="border-slate-700 bg-slate-1000/50 p-6">
+        <h3 className="text-lg font-semibold text-white mb-4">Estructura Social del Aula</h3>
+        <div className="bg-slate-900 rounded-lg overflow-hidden">
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={400}
+            onClick={handleCanvasClick(canvasRef)}
+            className="w-full cursor-pointer"
           />
-          <span className="text-slate-300">Rechazo</span>
         </div>
-      </div>
-    </Card>
+        <div className="mt-4 flex gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-green-500" />
+            <span className="text-slate-300">Alta aceptación</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-yellow-500" />
+            <span className="text-slate-300">Aceptación media</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-red-500" />
+            <span className="text-slate-300">Baja aceptación</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-0.5 bg-green-500" />
+            <span className="text-slate-300">Relación positiva</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div
+              className="w-12 h-0.5 bg-red-500"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
+              }}
+            />
+            <span className="text-slate-300">Rechazo</span>
+          </div>
+        </div>
+      </Card>
+      <Card className="border-slate-700 bg-slate-1000/50 p-6">
+        <h3 className="text-lg font-semibold text-white mb-4">Estructura Social del Patio</h3>
+        <div className="bg-slate-900 rounded-lg overflow-hidden">
+          <canvas
+            ref={canvasRef2}
+            width={600}
+            height={400}
+            onClick={handleCanvasClick(canvasRef2)}
+            className="w-full cursor-pointer"
+          />
+        </div>
+        <div className="mt-4 flex gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-green-500" />
+            <span className="text-slate-300">Alta aceptación</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-yellow-500" />
+            <span className="text-slate-300">Aceptación media</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full bg-red-500" />
+            <span className="text-slate-300">Baja aceptación</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-0.5 bg-green-500" />
+            <span className="text-slate-300">Relación positiva</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div
+              className="w-12 h-0.5 bg-red-500"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
+              }}
+            />
+            <span className="text-slate-300">Rechazo</span>
+          </div>
+        </div>
+      </Card>
+    </>
   )
 }
