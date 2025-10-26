@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { SociometricMapFilters } from "@/components/sociometric/sociometric-filters"
 import { SociometricMapVisualization } from "@/components/sociometric/sociometric-visualization"
 import { StudentDetailPanel } from "@/components/sociometric/student-detail-panel"
+import { AIChatbot } from "@/components/ai-chatbot/ai-chatbot"
 
 export default function SociometricMapPage() {
   const router = useRouter()
-  const [user, setUser] = useState<any>(null)
+  const { user, isLoading } = useAuth()
   const [filters, setFilters] = useState({
     level: "primaria",
     grade: "1",
@@ -18,15 +20,14 @@ export default function SociometricMapPage() {
   const [selectedStudent, setSelectedStudent] = useState<string | null>(null)
 
   useEffect(() => {
-    const userData = localStorage.getItem("user")
-    if (!userData) {
+    if (!isLoading && !user) {
       router.push("/")
-    } else {
-      setUser(JSON.parse(userData))
     }
-  }, [router])
+  }, [user, isLoading, router])
 
-  if (!user) return null
+  if (isLoading || !user) return null
+
+  const chatbotContext = `Mapa Sociométrico - ${filters.level === "primaria" ? "Primaria" : "Secundaria"} ${filters.grade}° ${filters.section}`
 
   return (
     <DashboardLayout>
@@ -49,6 +50,8 @@ export default function SociometricMapPage() {
           <div>{selectedStudent && <StudentDetailPanel studentId={selectedStudent} filters={filters} />}</div>
         </div>
       </div>
+
+      <AIChatbot pageContext={chatbotContext} />
     </DashboardLayout>
   )
 }

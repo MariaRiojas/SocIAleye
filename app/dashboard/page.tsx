@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/lib/auth-context"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { DashboardFilters } from "@/components/dashboard/dashboard-filters"
 import { DashboardStats } from "@/components/dashboard/dashboard-stats"
 import { ClassroomOverview } from "@/components/dashboard/classroom-overview"
+import { AIChatbot } from "@/components/ai-chatbot/ai-chatbot"
 
 export default function Dashboard() {
   const router = useRouter()
-  const [user, setUser] = useState<any>(null)
+  const { user, isLoading } = useAuth()
   const [filters, setFilters] = useState({
     level: "primaria",
     grade: "1",
@@ -17,15 +19,14 @@ export default function Dashboard() {
   })
 
   useEffect(() => {
-    const userData = localStorage.getItem("user")
-    if (!userData) {
+    if (!isLoading && !user) {
       router.push("/")
-    } else {
-      setUser(JSON.parse(userData))
     }
-  }, [router])
+  }, [user, isLoading, router])
 
-  if (!user) return null
+  if (isLoading || !user) return null
+
+  const chatbotContext = `Dashboard - ${filters.level === "primaria" ? "Primaria" : "Secundaria"} ${filters.grade}° ${filters.section}`
 
   return (
     <DashboardLayout>
@@ -39,6 +40,8 @@ export default function Dashboard() {
         <DashboardStats filters={filters} />
         <ClassroomOverview filters={filters} />
       </div>
+
+      <AIChatbot pageContext={chatbotContext} />
     </DashboardLayout>
   )
 }
