@@ -39,15 +39,23 @@ export default function SociometricMapPage() {
 
         <SociometricMapFilters filters={filters} onFiltersChange={setFilters} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+        {/* SOLUCIÓN: Layout mejorado */}
+        <div className="flex flex-col xl:flex-row gap-6">
+          {/* Componente de visualización - Ocupa todo el espacio disponible */}
+          <div className={`${selectedStudent ? "xl:flex-1" : "w-full"}`}>
             <SociometricMapVisualization
               filters={filters}
               selectedStudent={selectedStudent}
               onSelectStudent={setSelectedStudent}
             />
           </div>
-          <div>{selectedStudent && <StudentDetailPanel studentId={selectedStudent} filters={filters} />}</div>
+          
+          {/* Panel de detalles - Solo aparece cuando hay estudiante seleccionado */}
+          {selectedStudent && (
+            <div className="xl:w-96 xl:min-w-96">
+              <StudentDetailPanel studentId={selectedStudent} filters={filters} />
+            </div>
+          )}
         </div>
       </div>
 
