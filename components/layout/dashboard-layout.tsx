@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
-import { Menu, X, LogOut, Map, AlertTriangle, Home, Settings, Calendar } from "lucide-react"
+import { Menu, X, LogOut, Map, AlertTriangle, Home, Settings, Calendar, Users } from "lucide-react"
 import Link from "next/link"
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -28,6 +28,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     { href: "/dashboard", label: "Dashboard", icon: Home },
     { href: "/sociometric-map", label: "Mapa Sociométrico", icon: Map },
     { href: "/alerts", label: "Alertas Tempranas", icon: AlertTriangle },
+    { href: "/profiles", label: "Perfiles", icon: Users },
+    { href: "/reports", label: "Reportes", icon: AlertTriangle },
   ]
 
   const adminNavItems = [
@@ -95,11 +97,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-slate-900">
       {/* Overlay para móvil */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40"
-          onClick={() => setSidebarOpen(false)}
-          aria-hidden="true"
-        />
+        <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
       )}
 
       {/* Sidebar - Solo iconos colapsado, expandible en móvil */}
@@ -194,9 +192,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main className="ml-16 min-h-screen">
         <div className="h-screen overflow-y-auto">
-          <div className="p-4 sm:p-6 lg:p-8 w-full max-w-full">
-            {children}
-          </div>
+          <div className="p-4 sm:p-6 lg:p-8 w-full max-w-full">{children}</div>
         </div>
       </main>
     </div>
