@@ -34,14 +34,13 @@ export default function AlertsPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-white">Gestión de Alertas Tempranas</h1>
-          <p className="text-slate-400 mt-2">Monitoreo y respuesta a patrones de riesgo</p>
+          <p className="text-stone-400 mt-2">Monitoreo y respuesta a patrones de riesgo</p>
         </div>
 
         <AlertsFilters filters={filters} onFiltersChange={setFilters} />
         <AlertsList filters={filters} />
       </div>
 
-      <AIChatbot pageContext={chatbotContext} />
     </DashboardLayout>
   )
 }

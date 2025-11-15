@@ -157,86 +157,86 @@ export function AIChatbot({ pageContext = "Dashboard general" }: AIChatbotProps)
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center transition-all z-40 hover:scale-110"
+        className="fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-orange-600 hover:bg-orange-700 text-white shadow-lg flex items-center justify-center transition-all z-40 hover:scale-110"
         aria-label="Abrir chat"
       >
         <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
       {/* Chat Window */}
-      {isOpen && (
-        <Card className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-96 border-slate-700 bg-slate-800 shadow-2xl flex flex-col z-50 max-w-sm">
-          {/* Header */}
-          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-slate-700 flex-shrink-0">
-            <div className="min-w-0 flex-1">
-              <h3 className="font-semibold text-white text-sm sm:text-base truncate">Asistente SocIAleye</h3>
-              <p className="text-xs text-slate-400 truncate">{pageContext}</p>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-slate-400 hover:text-white transition-colors flex-shrink-0 ml-2"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Messages */}
-          <div 
-            ref={messagesContainerRef}
-            className="custom-scrollbar flex-1 overflow-y-auto p-3 sm:p-4 space-y-4"
-            style={{
-              scrollbarWidth: 'thin',
-              scrollbarColor: '#475569 rgba(30, 41, 59, 0.5)'
-            }}
-          >
-            {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-xs px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm ${
-                    message.role === "user"
-                      ? "bg-blue-600 text-white rounded-br-none"
-                      : "bg-slate-700 text-slate-100 rounded-bl-none"
-                  }`}
-                >
-                  <p>{message.content}</p>
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-slate-700 text-slate-100 px-3 sm:px-4 py-2 rounded-lg rounded-bl-none">
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-200" />
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input */}
-          <div className="p-3 sm:p-4 border-t border-slate-700 flex gap-2 flex-shrink-0">
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              placeholder="Escribe tu pregunta..."
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-500 text-sm"
-              disabled={isLoading}
-            />
-            <Button
-              onClick={handleSendMessage}
-              disabled={isLoading || !input.trim()}
-              className="bg-blue-600 hover:bg-blue-700 text-white flex-shrink-0"
-              size="icon"
-            >
-              <Send className="w-4 h-4" />
-            </Button>
-          </div>
-        </Card>
-      )}
+      {
+        //<Card className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 w-[calc(100vw-2rem)] sm:w-96 h-96 border-stone-700 bg-stone-800 shadow-2xl flex flex-col z-50 max-w-sm">
+        //  {/* Header */}
+        //  <div className="flex items-center justify-between p-3 sm:p-4 border-b border-stone-700 flex-shrink-0">
+        //    <div className="min-w-0 flex-1">
+        //      <h3 className="font-semibold text-white text-sm sm:text-base truncate">Asistente SocIAleye</h3>
+        //      <p className="text-xs text-stone-400 truncate">{pageContext}</p>
+        //    </div>
+        //    <button
+        //      onClick={() => setIsOpen(false)}
+        //      className="text-stone-400 hover:text-white transition-colors flex-shrink-0 ml-2"
+        //    >
+        //      <X className="w-5 h-5" />
+        //    </button>
+        //  </div>
+//
+        //  {/* Messages */}
+        //  <div 
+        //    ref={messagesContainerRef}
+        //    className="custom-scrollbar flex-1 overflow-y-auto p-3 sm:p-4 space-y-4"
+        //    style={{
+        //      scrollbarWidth: 'thin',
+        //      scrollbarColor: '#475569 rgba(30, 41, 59, 0.5)'
+        //    }}
+        //  >
+        //    {messages.map((message) => (
+        //      <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+        //        <div
+        //          className={`max-w-xs px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm ${
+        //            message.role === "user"
+        //              ? "bg-orange-600 text-white rounded-br-none"
+        //              : "bg-stone-700 text-stone-100 rounded-bl-none"
+        //          }`}
+        //        >
+        //          <p>{message.content}</p>
+        //        </div>
+        //      </div>
+        //    ))}
+        //    {isLoading && (
+        //      <div className="flex justify-start">
+        //        <div className="bg-stone-700 text-stone-100 px-3 sm:px-4 py-2 rounded-lg rounded-bl-none">
+        //          <div className="flex gap-1">
+        //            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />
+        //            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-100" />
+        //            <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce delay-200" />
+        //          </div>
+        //        </div>
+        //      </div>
+        //    )}
+        //    <div ref={messagesEndRef} />
+        //  </div>
+//
+        //  {/* Input */}
+        //  <div className="p-3 sm:p-4 border-t border-stone-700 flex gap-2 flex-shrink-0">
+        //    <Input
+        //      value={input}
+        //      onChange={(e) => setInput(e.target.value)}
+        //      onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+        //      placeholder="Escribe tu pregunta..."
+        //      className="bg-stone-700/50 border-stone-600 text-white placeholder:text-stone-500 text-sm"
+        //      disabled={isLoading}
+        //    />
+        //    <Button
+        //      onClick={handleSendMessage}
+        //      disabled={isLoading || !input.trim()}
+        //      className="bg-orange-600 hover:bg-orange-700 text-white flex-shrink-0"
+        //      size="icon"
+        //    >
+        //      <Send className="w-4 h-4" />
+        //    </Button>
+        //  </div>
+        //</Card>
+    }
     </>
   )
 }

@@ -75,7 +75,7 @@ export function DataLayersDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-muted-foreground">Puntuación de Salud General</p>
-            <p className="text-4xl font-bold text-blue-400">{avgHealthScore}%</p>
+            <p className="text-4xl font-bold text-orange-400">{avgHealthScore}%</p>
           </div>
           <div className="text-right space-y-1">
             <p className="text-sm text-muted-foreground">Capas activas</p>
@@ -88,9 +88,9 @@ export function DataLayersDashboard() {
       {/* Data Layers Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {dataLayers.map((layer, i) => (
-          <Card key={i} className="border-border bg-background p-6 space-y-4 hover:border-blue-500/50 transition">
+          <Card key={i} className="border-border bg-background p-6 space-y-4 hover:border-orange-500/50 transition">
             <div className="flex items-start justify-between">
-              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400">
                 {layer.icon}
               </div>
               <span className="text-xs font-semibold text-muted-foreground">{layer.dataPoints} puntos</span>
@@ -104,7 +104,7 @@ export function DataLayersDashboard() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground">Salud</span>
-                <span className="text-sm font-bold text-blue-400">{layer.healthScore}%</span>
+                <span className="text-sm font-bold text-orange-400">{layer.healthScore}%</span>
               </div>
               <Progress value={layer.healthScore} className="h-1.5" />
             </div>
@@ -125,7 +125,7 @@ export function DataLayersDashboard() {
         <h4 className="font-semibold">Procesamiento de IA</h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <p className="text-sm font-medium text-blue-400">Machine Learning</p>
+            <p className="text-sm font-medium text-orange-400">Machine Learning</p>
             <p className="text-xs text-muted-foreground">Análisis de patrones académicos y comportamentales</p>
           </div>
           <div className="space-y-2">

@@ -44,7 +44,7 @@ export function ClassroomOverview({ filters }: ClassroomOverviewProps) {
   }
 
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+    <Card className="border-slate-700 bg-slate-800 p-4 sm:p-6">
       <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
         <span className="block sm:inline">Resumen de Estudiantes - </span>
         <span className="block sm:inline mt-1 sm:mt-0">
@@ -56,10 +56,10 @@ export function ClassroomOverview({ filters }: ClassroomOverviewProps) {
         {students.map((student) => (
           <div
             key={student.id}
-            className="p-3 sm:p-4 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-slate-500 transition-colors"
+            className="p-3 sm:p-4 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-orange-500/50 hover:bg-slate-700 transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-2 gap-2">
-              <p className="font-medium text-white text-sm sm:text-base flex-1 min-w-0 truncate">
+              <p className="font-medium text-white text-sm sm:text-base flex-1 min-w-0 truncate group-hover:text-orange-400 transition-colors">
                 {student.name}
               </p>
               <Badge className={`${getStatusColor(student.status)} border text-xs flex-shrink-0`}>
@@ -67,7 +67,7 @@ export function ClassroomOverview({ filters }: ClassroomOverviewProps) {
               </Badge>
             </div>
             <p className="text-xs sm:text-sm text-slate-400">
-              Interacciones: <span className="font-semibold">{student.interactions}</span>
+              Interacciones: <span className="font-semibold text-slate-300">{student.interactions}</span>
             </p>
           </div>
         ))}

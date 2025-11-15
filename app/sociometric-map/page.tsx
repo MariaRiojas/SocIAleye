@@ -34,7 +34,7 @@ export default function SociometricMapPage() {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-white">Mapa Sociométrico Interactivo</h1>
-          <p className="text-slate-400 mt-2">Visualización de dinámicas sociales del aula</p>
+          <p className="text-stone-400 mt-2">Visualización de dinámicas sociales del aula</p>
         </div>
 
         <SociometricMapFilters filters={filters} onFiltersChange={setFilters} />
@@ -59,7 +59,7 @@ export default function SociometricMapPage() {
         </div>
       </div>
 
-      <AIChatbot pageContext={chatbotContext} />
+      
     </DashboardLayout>
   )
 }

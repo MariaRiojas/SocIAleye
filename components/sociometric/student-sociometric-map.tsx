@@ -294,27 +294,27 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
 
   return (
     <div ref={containerRef} className="w-full">
-      <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6 space-y-4">
+      <Card className="border-stone-700 bg-stone-800/50 p-4 sm:p-6 space-y-4">
         <div>
           <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-cyan-500"></span>
+            <span className="w-3 h-3 rounded-full bg-orange-500"></span>
             Posición Sociométrica - {studentName}
           </h3>
-          <p className="text-slate-400 text-sm mt-2">
+          <p className="text-stone-400 text-sm mt-2">
             Visualización de la posición social de {studentName} dentro del grupo clase y sus relaciones con compañeros.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 border">
+          <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30 border">
             {filters.level === "primaria" ? "Primaria" : "Secundaria"} {filters.grade}° - Sección {filters.section}
           </Badge>
-          <Badge className="bg-slate-700 text-slate-300 border-slate-600 border">
+          <Badge className="bg-stone-700 text-stone-300 border-stone-600 border">
             8 estudiantes en la clase
           </Badge>
         </div>
 
-        <div className="bg-slate-900/50 rounded-lg overflow-hidden border border-slate-700">
+        <div className="bg-stone-900/50 rounded-lg overflow-hidden border border-stone-700">
           <canvas
             ref={canvasRef}
             style={{
@@ -327,7 +327,7 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
         </div>
 
         {/* LEYENDA DE ESTUDIANTES */}
-        <div className="pt-4 border-t border-slate-700">
+        <div className="pt-4 border-t border-stone-700">
           <h4 className="text-sm font-semibold text-white mb-3">Estudiantes en la Clase</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {students.map((student) => (
@@ -335,8 +335,8 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
                 key={student.id}
                 className={`p-3 rounded-lg border ${
                   student.id === studentId
-                    ? "bg-blue-500/20 border-blue-500/50"
-                    : "bg-slate-700/50 border-slate-600"
+                    ? "bg-orange-500/20 border-orange-500/50"
+                    : "bg-stone-700/50 border-stone-600"
                 } transition-all`}
               >
                 <div className="flex items-start gap-3">
@@ -344,12 +344,12 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
                     className={`w-3 h-3 rounded-full flex-shrink-0 mt-1 ${getStudentColor(student.acceptance)}`}
                   ></div>
                   <div className="min-w-0 flex-1">
-                    <p className={`text-sm font-medium truncate ${student.id === studentId ? "text-blue-300" : "text-white"}`}>
+                    <p className={`text-sm font-medium truncate ${student.id === studentId ? "text-orange-300" : "text-white"}`}>
                       {student.name}
                     </p>
-                    <p className="text-xs text-slate-400">{getAcceptanceLabel(student.acceptance)}</p>
+                    <p className="text-xs text-stone-400">{getAcceptanceLabel(student.acceptance)}</p>
                     {student.id === studentId && (
-                      <p className="text-xs text-blue-300 mt-1 font-semibold">← Estudiante seleccionado</p>
+                      <p className="text-xs text-orange-300 mt-1 font-semibold">← Estudiante seleccionado</p>
                     )}
                   </div>
                 </div>
@@ -359,14 +359,14 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
         </div>
 
         {/* LEYENDA DE RELACIONES Y ACEPTACIÓN */}
-        <div className="pt-4 border-t border-slate-700">
+        <div className="pt-4 border-t border-stone-700">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <h4 className="text-sm font-semibold text-white mb-2">Relaciones</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-1 rounded-full bg-green-500"></div>
-                  <span className="text-xs text-slate-300">Relación positiva</span>
+                  <span className="text-xs text-stone-300">Relación positiva</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div
@@ -375,7 +375,7 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
                       backgroundImage: "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
                     }}
                   ></div>
-                  <span className="text-xs text-slate-300">Conflicto / rechazo</span>
+                  <span className="text-xs text-stone-300">Conflicto / rechazo</span>
                 </div>
               </div>
             </div>
@@ -384,36 +384,36 @@ export function StudentSociometricMap({ studentId, studentName, filters }: Stude
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  <span className="text-xs text-slate-300">Alta aceptación social</span>
+                  <span className="text-xs text-stone-300">Alta aceptación social</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <span className="text-xs text-slate-300">Aceptación media</span>
+                  <span className="text-xs text-stone-300">Aceptación media</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <span className="text-xs text-slate-300">Baja aceptación / aislamiento</span>
+                  <span className="text-xs text-stone-300">Baja aceptación / aislamiento</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-700">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-stone-700">
           <div className="space-y-1">
-            <p className="text-xs text-slate-400">Elecciones Recibidas</p>
+            <p className="text-xs text-stone-400">Elecciones Recibidas</p>
             <p className="text-2xl font-bold text-green-400">5</p>
-            <p className="text-xs text-slate-400">compañeros lo eligen</p>
+            <p className="text-xs text-stone-400">compañeros lo eligen</p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-slate-400">Rechazos Recibidos</p>
+            <p className="text-xs text-stone-400">Rechazos Recibidos</p>
             <p className="text-2xl font-bold text-red-400">2</p>
-            <p className="text-xs text-slate-400">compañeros lo rechazan</p>
+            <p className="text-xs text-stone-400">compañeros lo rechazan</p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-slate-400">Índice Sociométrico</p>
-            <p className="text-2xl font-bold text-blue-400">+3</p>
-            <p className="text-xs text-slate-400">posición en el grupo</p>
+            <p className="text-xs text-stone-400">Índice Sociométrico</p>
+            <p className="text-2xl font-bold text-orange-400">+3</p>
+            <p className="text-xs text-stone-400">posición en el grupo</p>
           </div>
         </div>
       </Card>

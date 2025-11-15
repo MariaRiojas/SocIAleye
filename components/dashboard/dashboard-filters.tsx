@@ -21,10 +21,13 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
   const grades = filters.level === "primaria" ? primaryGrades : secondaryGrades
 
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+    <Card className="border-2 border-[#E67E22]  p-4 sm:p-6 shadow-md">
+      <div className="border-b-2 border-[#E67E22] pb-3 mb-4">
+        <h3 className="text-lg font-bold text-[#E67E22]">Filtros de Búsqueda</h3>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Nivel</label>
+          <label className="text-sm font-bold text-[#FFFFFF]">Nivel Educativo</label>
           <div className="flex gap-2 w-full">
             {levels.map((level) => (
               <Button
@@ -32,8 +35,8 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
                 variant={filters.level === level ? "default" : "outline"}
                 size="sm"
                 onClick={() => onFiltersChange({ ...filters, level, grade: "1" })}
-                className={`flex-1 ${
-                  filters.level === level ? "bg-blue-600 hover:bg-blue-700" : "border-slate-600 text-slate-300"
+                className={`flex-1 font-semibold ${
+                  filters.level === level ? "bg-[#E67E22] hover:bg-[#D35400] text-white" : "border-2 border-[#E67E22]/30 text-[#1A1F2E] hover:border-[#E67E22]"
                 }`}
               >
                 {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -43,11 +46,11 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Grado</label>
+          <label className="text-sm font-bold text-[#FFFFF]">Grado</label>
           <select
             value={filters.grade}
             onChange={(e) => onFiltersChange({ ...filters, grade: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 rounded-lg bg-[#FAFBFC] border-2 border-[#E67E22]/30 text-[#1A1F2E] text-sm font-medium focus:outline-none focus:border-[#E67E22] focus:ring-2 focus:ring-[#E67E22]/30"
           >
             {grades.map((grade) => (
               <option key={grade} value={grade}>
@@ -58,11 +61,11 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Sección</label>
+          <label className="text-sm font-bold text-[#FFFFF]">Sección</label>
           <select
             value={filters.section}
             onChange={(e) => onFiltersChange({ ...filters, section: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 rounded-lg bg-[#FAFBFC] border-2 border-[#E67E22]/30 text-[#1A1F2E] text-sm font-medium focus:outline-none focus:border-[#E67E22] focus:ring-2 focus:ring-[#E67E22]/30"
           >
             {sections.map((section) => (
               <option key={section} value={section}>
@@ -73,7 +76,7 @@ export function DashboardFilters({ filters, onFiltersChange }: DashboardFiltersP
         </div>
 
         <div className="flex items-end">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-sm sm:text-base">
+          <Button className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white font-bold text-sm sm:text-base py-2">
             Aplicar Filtros
           </Button>
         </div>

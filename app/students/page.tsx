@@ -210,7 +210,7 @@ export default function StudentsPage() {
 
   const getTrendIcon = (tendencia: string) => {
     if (tendencia === "subiendo" || tendencia === "mejorando") {
-      return <TrendingUp className="w-4 h-4 text-green-400" />
+      return <TrendingUp className="w-4 h-4 text-emerald-400" />
     }
     return <TrendingDown className="w-4 h-4 text-red-400" />
   }
@@ -224,9 +224,9 @@ export default function StudentsPage() {
   return (
     <DashboardLayout>
       <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Gestión de Estudiantes</h1>
-          <p className="text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">
+        <div className="border-b-2 border-amber-500 pb-3">
+          <h1 className="text-2xl sm:text-3xl font-bold text-amber-400">Gestión de Estudiantes</h1>
+          <p className="text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base font-medium">
             Vista consolidada: perfiles, análisis detallado y sociometría de estudiantes
           </p>
         </div>
@@ -239,21 +239,21 @@ export default function StudentsPage() {
             <Button
               onClick={() => setSelectedStudent(null)}
               variant="outline"
-              className="bg-slate-700 hover:bg-slate-600 text-white border-slate-600 flex items-center gap-2"
+              className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border-amber-500/50 flex items-center gap-2 font-medium"
             >
               <X className="w-4 h-4" />
               Volver a Lista
             </Button>
 
             {/* HEADER DEL ESTUDIANTE */}
-            <Card className="border-slate-700 bg-gradient-to-r from-slate-800/50 to-slate-800/30 p-4 sm:p-6">
+            <Card className="border-2 border-amber-500/50 bg-gradient-to-r from-amber-500/10 to-amber-500/5 p-4 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white">{selectedStudent.name}</h2>
-                  <p className="text-slate-400 text-sm mt-1">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-100">{selectedStudent.name}</h2>
+                  <p className="text-slate-400 text-sm mt-1 font-medium">
                     {formatStudentName(filters.level)} {selectedStudent.grade}° - Sección {selectedStudent.section}
                   </p>
-                  <p className="text-xs text-slate-400 mt-2">
+                  <p className="text-xs text-slate-500 mt-2">
                     Actualizado: {new Date(selectedStudent.lastUpdated).toLocaleDateString("es-ES")}
                   </p>
                 </div>
@@ -261,7 +261,7 @@ export default function StudentsPage() {
                   <Badge className={`${getRiskColor(getRiskLevel(selectedStudent.profile))} border text-sm`}>
                     Riesgo: {getRiskLevel(selectedStudent.profile)}
                   </Badge>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+                  <Button className="bg-sky-600/80 hover:bg-sky-600 text-slate-100 gap-2 font-medium border border-sky-500/50">
                     <Download className="w-4 h-4" />
                     Exportar
                   </Button>
@@ -271,52 +271,52 @@ export default function StudentsPage() {
 
             {/* GRID DE MÉTRICAS PRINCIPALES */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-              <Card className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
-                <p className="text-xs text-slate-400 mb-1">Incidentes</p>
-                <p className="text-2xl font-bold text-white">{selectedStudent.profile.conductual.incidentes}</p>
+              <Card className="border border-slate-600 bg-slate-800/50 p-3 sm:p-4">
+                <p className="text-xs text-slate-400 font-medium mb-1">Incidentes</p>
+                <p className="text-2xl font-bold text-sky-400">{selectedStudent.profile.conductual.incidentes}</p>
               </Card>
-              <Card className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
-                <p className="text-xs text-slate-400 mb-1">Emocional</p>
-                <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.score}</p>
+              <Card className="border border-slate-600 bg-slate-800/50 p-3 sm:p-4">
+                <p className="text-xs text-slate-400 font-medium mb-1">Emocional</p>
+                <p className="text-2xl font-bold text-emerald-400">{selectedStudent.profile.emocional.score}</p>
               </Card>
-              <Card className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
-                <p className="text-xs text-slate-400 mb-1">Empatía</p>
-                <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.capacidadEmpatica}</p>
+              <Card className="border border-slate-600 bg-slate-800/50 p-3 sm:p-4">
+                <p className="text-xs text-slate-400 font-medium mb-1">Empatía</p>
+                <p className="text-2xl font-bold text-amber-400">{selectedStudent.profile.emocional.capacidadEmpatica}</p>
               </Card>
-              <Card className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
-                <p className="text-xs text-slate-400 mb-1">Justificación</p>
-                <p className="text-2xl font-bold text-white">
+              <Card className="border border-slate-600 bg-slate-800/50 p-3 sm:p-4">
+                <p className="text-xs text-slate-400 font-medium mb-1">Justificación</p>
+                <p className="text-2xl font-bold text-red-400">
                   {selectedStudent.profile.cognitivo.nivelJustificacion}%
                 </p>
               </Card>
             </div>
 
             {/* SECCIÓN 1: DIMENSIÓN CONDUCTUAL */}
-            <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6 space-y-4">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+            <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6 space-y-4">
+              <h3 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-sky-500"></span>
                 Dimensión Conductual - Histórico de Incidentes
               </h3>
               <Card className={`border p-4 ${getDimensionColor(selectedStudent.profile.conductual.status)}`}>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
                   <div>
-                    <p className="text-xs opacity-75">Frecuencia</p>
-                    <p className="font-semibold capitalize">{selectedStudent.profile.conductual.frecuencia}</p>
+                    <p className="text-xs text-slate-400">Frecuencia</p>
+                    <p className="font-semibold capitalize text-slate-200">{selectedStudent.profile.conductual.frecuencia}</p>
                   </div>
                   <div>
-                    <p className="text-xs opacity-75">Intensidad</p>
-                    <p className="font-semibold capitalize">{selectedStudent.profile.conductual.intensidad}</p>
+                    <p className="text-xs text-slate-400">Intensidad</p>
+                    <p className="font-semibold capitalize text-slate-200">{selectedStudent.profile.conductual.intensidad}</p>
                   </div>
                 </div>
               </Card>
               <div className="space-y-2">
                 {selectedStudent.profile.conductual.historial && selectedStudent.profile.conductual.historial.length > 0 ? (
                   selectedStudent.profile.conductual.historial.map((incident, idx) => (
-                    <Card key={idx} className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
+                    <Card key={idx} className="border border-slate-700 bg-slate-900/50 p-3 sm:p-4">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div>
-                          <p className="text-white font-medium text-sm">{incident.tipo}</p>
-                          <p className="text-slate-400 text-xs mt-1">{incident.fecha}</p>
+                          <p className="text-slate-200 font-medium text-sm">{incident.tipo}</p>
+                          <p className="text-slate-500 text-xs mt-1">{incident.fecha}</p>
                         </div>
                         <Badge className={`text-xs ${getSeverityColor(incident.severidad)}`}>
                           {incident.severidad.charAt(0).toUpperCase() + incident.severidad.slice(1)}
@@ -325,7 +325,7 @@ export default function StudentsPage() {
                     </Card>
                   ))
                 ) : (
-                  <Card className="border-slate-700 bg-slate-700/50 p-3 sm:p-4">
+                  <Card className="border border-slate-700 bg-slate-900/50 p-3 sm:p-4">
                     <p className="text-slate-400 text-sm">Sin incidentes registrados</p>
                   </Card>
                 )}
@@ -333,39 +333,39 @@ export default function StudentsPage() {
             </Card>
 
             {/* SECCIÓN 2: DIMENSIÓN EMOCIONAL */}
-            <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6 space-y-4">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-purple-500"></span>
+            <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6 space-y-4">
+              <h3 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
                 Dimensión Emocional - Tendencia
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Card className="border-slate-700 bg-slate-700/50 p-4">
+                <Card className="border border-slate-700 bg-slate-900/50 p-4">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-xs text-slate-400">Estabilidad</p>
                     {selectedStudent.profile.emocional.tendencia && getTrendIcon(selectedStudent.profile.emocional.tendencia)}
                   </div>
-                  <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.score}</p>
-                  <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
+                  <p className="text-2xl font-bold text-slate-100">{selectedStudent.profile.emocional.score}</p>
+                  <div className="w-full bg-slate-700 rounded-full h-2 mt-2">
                     <div
                       className={getProgressBarColor(selectedStudent.profile.emocional.score)}
                       style={{ width: `${selectedStudent.profile.emocional.score}%` }}
                     ></div>
                   </div>
                 </Card>
-                <Card className="border-slate-700 bg-slate-700/50 p-4">
+                <Card className="border border-slate-700 bg-slate-900/50 p-4">
                   <p className="text-xs text-slate-400 mb-2">Capacidad Empática</p>
-                  <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.capacidadEmpatica}</p>
-                  <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
+                  <p className="text-2xl font-bold text-slate-100">{selectedStudent.profile.emocional.capacidadEmpatica}</p>
+                  <div className="w-full bg-slate-700 rounded-full h-2 mt-2">
                     <div
                       className={getProgressBarColor(selectedStudent.profile.emocional.capacidadEmpatica)}
                       style={{ width: `${selectedStudent.profile.emocional.capacidadEmpatica}%` }}
                     ></div>
                   </div>
                 </Card>
-                <Card className="border-slate-700 bg-slate-700/50 p-4">
+                <Card className="border border-slate-700 bg-slate-900/50 p-4">
                   <p className="text-xs text-slate-400 mb-2">Autocontrol</p>
-                  <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.autocontrol}</p>
-                  <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
+                  <p className="text-2xl font-bold text-slate-100">{selectedStudent.profile.emocional.autocontrol}</p>
+                  <div className="w-full bg-slate-700 rounded-full h-2 mt-2">
                     <div
                       className={getProgressBarColor(selectedStudent.profile.emocional.autocontrol)}
                       style={{ width: `${selectedStudent.profile.emocional.autocontrol}%` }}
@@ -385,30 +385,30 @@ export default function StudentsPage() {
             {/* SECCIÓN 4: DIMENSIÓN SOCIAL + DIMENSIÓN COGNITIVA */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               {/* DIMENSIÓN SOCIAL */}
-              <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6 space-y-4">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-green-500"></span>
+              <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6 space-y-4">
+                <h3 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-violet-500"></span>
                   Dimensión Social
                 </h3>
                 <Card className={`border p-4 ${getDimensionColor(selectedStudent.profile.social.status)}`}>
                   <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs opacity-75">Rol en Grupo</p>
-                      <p className="font-semibold capitalize text-sm">
+                      <p className="text-xs text-slate-400">Rol en Grupo</p>
+                      <p className="font-semibold capitalize text-sm text-slate-200">
                         {selectedStudent.profile.social.rol.replace("_", " ")}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs opacity-75">Rel. Positivas</p>
-                      <p className="font-semibold">{selectedStudent.profile.social.relacionesPositivas}</p>
+                      <p className="text-xs text-slate-400">Rel. Positivas</p>
+                      <p className="font-semibold text-slate-200">{selectedStudent.profile.social.relacionesPositivas}</p>
                     </div>
                     <div>
-                      <p className="text-xs opacity-75">Rel. Conflictivas</p>
-                      <p className="font-semibold">{selectedStudent.profile.social.relacionesConflictivas}</p>
+                      <p className="text-xs text-slate-400">Rel. Conflictivas</p>
+                      <p className="font-semibold text-slate-200">{selectedStudent.profile.social.relacionesConflictivas}</p>
                     </div>
                     <div>
-                      <p className="text-xs opacity-75">Conducta Dominante</p>
-                      <p className="font-semibold">{selectedStudent.profile.social.dominancia ? "Sí" : "No"}</p>
+                      <p className="text-xs text-slate-400">Conducta Dominante</p>
+                      <p className="font-semibold text-slate-200">{selectedStudent.profile.social.dominancia ? "Sí" : "No"}</p>
                     </div>
                   </div>
                 </Card>
@@ -418,7 +418,7 @@ export default function StudentsPage() {
                     <p className="text-xs text-slate-400 mb-2">Grupos de Influencia</p>
                     <div className="flex flex-wrap gap-2">
                       {selectedStudent.profile.social.gruposInfluencia.map((grupo, idx) => (
-                        <Badge key={idx} className="bg-blue-500/20 text-blue-300 border-blue-500/30 border">
+                        <Badge key={idx} className="bg-sky-500/20 text-sky-300 border-sky-500/40 border">
                           {grupo}
                         </Badge>
                       ))}
@@ -428,21 +428,21 @@ export default function StudentsPage() {
               </Card>
 
               {/* DIMENSIÓN COGNITIVA */}
-              <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6 space-y-4">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-orange-500"></span>
+              <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6 space-y-4">
+                <h3 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-amber-500"></span>
                   Dimensión Cognitiva
                 </h3>
-                <Card className="border-slate-700 bg-slate-700/50 p-4 space-y-4">
+                <Card className="border border-slate-700 bg-slate-900/50 p-4 space-y-4">
                   <div>
                     <p className="text-xs text-slate-400 mb-2">Percepción Docente</p>
                     <Badge
                       className={`text-xs ${
                         selectedStudent.profile.cognitivo.percepcionDocente === "minimiza"
-                          ? "bg-red-500/20 text-red-400 border-red-500/30"
+                          ? "bg-red-500/20 text-red-300 border-red-500/40"
                           : selectedStudent.profile.cognitivo.percepcionDocente === "neutral"
-                            ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                            : "bg-green-500/20 text-green-400 border-green-500/30"
+                            ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                            : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
                       } border capitalize`}
                     >
                       {selectedStudent.profile.cognitivo.percepcionDocente}
@@ -454,8 +454,8 @@ export default function StudentsPage() {
                       <p className="text-xs text-slate-400">Nivel de Justificación</p>
                       {selectedStudent.profile.cognitivo.cambios && getTrendIcon(selectedStudent.profile.cognitivo.cambios)}
                     </div>
-                    <p className="text-lg font-bold text-white">{selectedStudent.profile.cognitivo.nivelJustificacion}%</p>
-                    <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
+                    <p className="text-lg font-bold text-slate-100">{selectedStudent.profile.cognitivo.nivelJustificacion}%</p>
+                    <div className="w-full bg-slate-700 rounded-full h-2 mt-2">
                       <div
                         className={getProgressBarColor(selectedStudent.profile.cognitivo.nivelJustificacion, true)}
                         style={{ width: `${selectedStudent.profile.cognitivo.nivelJustificacion}%` }}
@@ -468,7 +468,7 @@ export default function StudentsPage() {
                       <p className="text-xs text-slate-400 mb-2">Creencias Asociadas</p>
                       <div className="flex flex-wrap gap-2">
                         {selectedStudent.profile.cognitivo.creenciasAsociadas.map((creencia, idx) => (
-                          <Badge key={idx} className="bg-slate-600 text-slate-300 text-xs">
+                          <Badge key={idx} className="bg-slate-700 text-slate-300 border-slate-600 border text-xs">
                             {creencia}
                           </Badge>
                         ))}
@@ -482,8 +482,8 @@ export default function StudentsPage() {
         ) : (
           // VISTA DE LISTA DE ESTUDIANTES
           <>
-            <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
-              <h3 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">
+            <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
+              <h3 className="text-base sm:text-lg font-semibold text-slate-100 mb-4 sm:mb-6">
                 Estudiantes - {formatStudentName(filters.level)} {filters.grade}° Sección {filters.section}
               </h3>
 
@@ -494,10 +494,10 @@ export default function StudentsPage() {
                     <div
                       key={student.id}
                       onClick={() => setSelectedStudent(student)}
-                      className="p-4 sm:p-5 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-slate-500 hover:bg-slate-700/70 transition-all cursor-pointer group"
+                      className="p-4 sm:p-5 rounded-lg bg-slate-900/70 border border-slate-700 hover:border-amber-500/50 hover:bg-slate-900 transition-all cursor-pointer group"
                     >
                       <div className="mb-3">
-                        <p className="font-semibold text-white text-sm sm:text-base group-hover:text-blue-300 transition-colors">
+                        <p className="font-semibold text-slate-200 text-sm sm:text-base group-hover:text-amber-300 transition-colors">
                           {student.name}
                         </p>
                         <Badge className={`${getRiskColor(riskLevel)} border mt-2 text-xs`}>Riesgo: {riskLevel}</Badge>
@@ -506,16 +506,16 @@ export default function StudentsPage() {
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
                           <p className="text-slate-400">Conducta</p>
-                          <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.conductual.status)}`}></div>
+                          <div className={`w-3 h-3 rounded-full mt-1 ${getStatusIndicatorColor(student.profile.conductual.status)}`}></div>
                         </div>
                         <div>
                           <p className="text-slate-400">Social</p>
-                          <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.social.status)}`}></div>
+                          <div className={`w-3 h-3 rounded-full mt-1 ${getStatusIndicatorColor(student.profile.social.status)}`}></div>
                         </div>
                         <div>
                           <p className="text-slate-400">Emocional</p>
                           <div
-                            className={`w-3 h-3 rounded-full ${
+                            className={`w-3 h-3 rounded-full mt-1 ${
                               student.profile.emocional.capacidadEmpatica < 40
                                 ? getStatusIndicatorColor("red")
                                 : student.profile.emocional.capacidadEmpatica < 70
@@ -527,7 +527,7 @@ export default function StudentsPage() {
                         <div>
                           <p className="text-slate-400">Cognitivo</p>
                           <div
-                            className={`w-3 h-3 rounded-full ${
+                            className={`w-3 h-3 rounded-full mt-1 ${
                               student.profile.cognitivo.percepcionDocente === "minimiza"
                                 ? getStatusIndicatorColor("red")
                                 : student.profile.cognitivo.percepcionDocente === "neutral"
@@ -538,7 +538,7 @@ export default function StudentsPage() {
                         </div>
                       </div>
 
-                      <p className="text-xs text-slate-400 mt-3 pt-3 border-t border-slate-600">
+                      <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-700">
                         Click para ver perfil completo
                       </p>
                     </div>
@@ -547,23 +547,23 @@ export default function StudentsPage() {
               </div>
             </Card>
 
-            <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
-              <h4 className="text-sm sm:text-base font-semibold text-white mb-3">Leyenda de Dimensiones</h4>
+            <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
+              <h4 className="text-sm sm:text-base font-semibold text-slate-100 mb-3">Leyenda de Dimensiones</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-sky-500"></div>
                   <span className="text-slate-300">Conductual - Registro de incidentes</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                   <span className="text-slate-300">Emocional - Autoevaluación 0-100</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-violet-500"></div>
                   <span className="text-slate-300">Social - Interacciones académicas</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-amber-500"></div>
                   <span className="text-slate-300">Cognitivo - Percepción docente</span>
                 </div>
               </div>
@@ -571,8 +571,6 @@ export default function StudentsPage() {
           </>
         )}
       </div>
-
-      <AIChatbot pageContext={chatbotContext} />
     </DashboardLayout>
   )
 }

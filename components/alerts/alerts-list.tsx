@@ -61,7 +61,7 @@ export function AlertsList({ filters }: AlertsListProps) {
       case "medium":
         return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
       default:
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
     }
   }
 
@@ -79,26 +79,26 @@ export function AlertsList({ filters }: AlertsListProps) {
   return (
     <div className="space-y-4">
       {alerts.map((alert) => (
-        <Card key={alert.id} className="border-slate-700 bg-slate-800/50 p-6 hover:border-slate-600 transition">
+        <Card key={alert.id} className="border-stone-700 bg-stone-800/50 p-6 hover:border-stone-600 transition">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-start gap-3">
               {getStatusIcon(alert.status)}
               <div>
                 <h4 className="font-semibold text-white">{alert.student}</h4>
-                <p className="text-sm text-slate-400 mt-1">{alert.type}</p>
+                <p className="text-sm text-stone-400 mt-1">{alert.type}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Badge className={`${getSeverityColor(alert.severity)} border`}>
                 {alert.severity === "high" ? "Alta" : alert.severity === "medium" ? "Media" : "Baja"}
               </Badge>
-              <Badge variant="outline" className="border-slate-600 text-slate-300">
+              <Badge variant="outline" className="border-stone-600 text-stone-300">
                 {alert.status === "active" ? "Activa" : alert.status === "monitoring" ? "Monitoreo" : "Resuelta"}
               </Badge>
             </div>
           </div>
-          <p className="text-sm text-slate-300 mb-3">{alert.description}</p>
-          <p className="text-xs text-slate-500">{alert.date}</p>
+          <p className="text-sm text-stone-300 mb-3">{alert.description}</p>
+          <p className="text-xs text-stone-500">{alert.date}</p>
         </Card>
       ))}
     </div>

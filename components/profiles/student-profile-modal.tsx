@@ -23,15 +23,15 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <Card className="border-slate-700 bg-slate-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6 border-b border-slate-700 flex items-center justify-between">
+      <Card className="border-stone-700 bg-stone-800 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6 border-b border-stone-700 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white">{student.name}</h2>
             <Badge className={`mt-2 ${getRiskColor(riskLevel)} border`}>
               Riesgo General: {riskLevel}
             </Badge>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white">
+          <button onClick={onClose} className="text-stone-400 hover:text-white">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -40,7 +40,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
           {/* DIMENSIÓN CONDUCTUAL */}
           <div className="space-y-3">
             <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+              <span className="w-3 h-3 rounded-full bg-orange-500"></span>
               Dimensión Conductual
             </h3>
             <Card className={`border p-4 ${getDimensionColor(student.profile.conductual.status)}`}>
@@ -78,8 +78,8 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
               Dimensión Emocional
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Card className="border-slate-700 bg-slate-700/50 p-4">
-                <p className="text-xs text-slate-400 mb-2">Estabilidad Emocional (0-100)</p>
+              <Card className="border-stone-700 bg-stone-700/50 p-4">
+                <p className="text-xs text-stone-400 mb-2">Estabilidad Emocional (0-100)</p>
                 <div className="space-y-2">
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.score}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
@@ -91,8 +91,8 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                 </div>
               </Card>
 
-              <Card className="border-slate-700 bg-slate-700/50 p-4">
-                <p className="text-xs text-slate-400 mb-2">Capacidad Empática (0-100)</p>
+              <Card className="border-stone-700 bg-stone-700/50 p-4">
+                <p className="text-xs text-stone-400 mb-2">Capacidad Empática (0-100)</p>
                 <div className="space-y-2">
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.capacidadEmpatica}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
@@ -104,8 +104,8 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                 </div>
               </Card>
 
-              <Card className="border-slate-700 bg-slate-700/50 p-4">
-                <p className="text-xs text-slate-400 mb-2">Autocontrol (0-100)</p>
+              <Card className="border-stone-700 bg-stone-700/50 p-4">
+                <p className="text-xs text-stone-400 mb-2">Autocontrol (0-100)</p>
                 <div className="space-y-2">
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.autocontrol}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
@@ -153,9 +153,9 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
               <span className="w-3 h-3 rounded-full bg-orange-500"></span>
               Dimensión Cognitiva
             </h3>
-            <Card className="border-slate-700 bg-slate-700/50 p-4 space-y-4">
+            <Card className="border-stone-700 bg-stone-700/50 p-4 space-y-4">
               <div>
-                <p className="text-xs text-slate-400 mb-2">Percepción Docente</p>
+                <p className="text-xs text-stone-400 mb-2">Percepción Docente</p>
                 <Badge
                   className={`${
                     student.profile.cognitivo.percepcionDocente === "minimiza"
@@ -170,7 +170,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
               </div>
 
               <div>
-                <p className="text-xs text-slate-400 mb-2">Nivel de Justificación del Acoso (0-100)</p>
+                <p className="text-xs text-stone-400 mb-2">Nivel de Justificación del Acoso (0-100)</p>
                 <div className="space-y-2">
                   <p className="text-lg font-bold text-white">{student.profile.cognitivo.nivelJustificacion}%</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
@@ -184,10 +184,10 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
 
               {student.profile.cognitivo.creenciasAsociadas.length > 0 && (
                 <div>
-                  <p className="text-xs text-slate-400 mb-2">Creencias Asociadas al Control/Dominio</p>
+                  <p className="text-xs text-stone-400 mb-2">Creencias Asociadas al Control/Dominio</p>
                   <div className="flex flex-wrap gap-2">
                     {student.profile.cognitivo.creenciasAsociadas.map((creencia, idx) => (
-                      <Badge key={idx} className="bg-slate-600 text-slate-300">
+                      <Badge key={idx} className="bg-slate-600 text-stone-300">
                         {creencia}
                       </Badge>
                     ))}
@@ -198,8 +198,8 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
           </div>
         </div>
 
-        <div className="p-6 border-t border-slate-700 flex justify-end gap-3">
-          <Button onClick={onClose} className="bg-slate-700 hover:bg-slate-600 text-white">
+        <div className="p-6 border-t border-stone-700 flex justify-end gap-3">
+          <Button onClick={onClose} className="bg-stone-700 hover:bg-slate-600 text-white">
             Cerrar
           </Button>
         </div>

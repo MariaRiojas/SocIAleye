@@ -93,7 +93,7 @@ export function StudentDetailPanel({ studentId, filters }: StudentDetailPanelPro
 
   return (
     <div className="space-y-4">
-      <Card className="border-slate-700 bg-slate-800/50 p-6">
+      <Card className="border-stone-700 bg-stone-800/50 p-6">
         <div className="space-y-4">
           <div>
             <h3 className="text-xl font-bold text-white">{student.name}</h3>
@@ -102,28 +102,28 @@ export function StudentDetailPanel({ studentId, filters }: StudentDetailPanelPro
             </Badge>
           </div>
 
-          <div className="space-y-3 pt-4 border-t border-slate-700">
+          <div className="space-y-3 pt-4 border-t border-stone-700">
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 text-sm">Elecciones recibidas</span>
+              <span className="text-stone-400 text-sm">Elecciones recibidas</span>
               <span className="text-white font-semibold">{student.choicesReceived}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 text-sm">Elecciones emitidas</span>
+              <span className="text-stone-400 text-sm">Elecciones emitidas</span>
               <span className="text-white font-semibold">{student.choicesEmitted}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 text-sm">Rechazos recibidos</span>
+              <span className="text-stone-400 text-sm">Rechazos recibidos</span>
               <span className="text-red-400 font-semibold">{student.rejections}</span>
             </div>
           </div>
 
-          <div className="space-y-3 pt-4 border-t border-slate-700">
+          <div className="space-y-3 pt-4 border-t border-stone-700">
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 text-sm">Rendimiento académico</span>
+              <span className="text-stone-400 text-sm">Rendimiento académico</span>
               <span className="text-white font-semibold">{student.academicScore}/10</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-400 text-sm">Estado emocional</span>
+              <span className="text-stone-400 text-sm">Estado emocional</span>
               <span className="text-white font-semibold capitalize">{student.emotionalState}</span>
             </div>
           </div>

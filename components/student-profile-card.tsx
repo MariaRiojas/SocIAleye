@@ -103,7 +103,7 @@ export function StudentProfileCard({
           </p>
         </div>
         <div className="text-center space-y-2">
-          <div className="text-2xl font-bold text-blue-400">{choicesEmitted}</div>
+          <div className="text-2xl font-bold text-orange-400">{choicesEmitted}</div>
           <p className="text-xs text-muted-foreground">Elecciones emitidas</p>
         </div>
         <div className="text-center space-y-2">
@@ -159,8 +159,8 @@ export function StudentProfileCard({
       </div>
 
       {/* Recommendations */}
-      <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg space-y-2">
-        <p className="font-semibold text-sm text-blue-400">Recomendaciones</p>
+      <div className="p-4 bg-orange-500/10 border border-orange-500/30 rounded-lg space-y-2">
+        <p className="font-semibold text-sm text-orange-400">Recomendaciones</p>
         <ul className="text-sm text-muted-foreground space-y-1">
           <li>• Realizar seguimiento semanal del estado emocional</li>
           <li>• Facilitar actividades colaborativas con pares positivos</li>

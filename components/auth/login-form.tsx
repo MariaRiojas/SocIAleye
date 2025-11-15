@@ -46,53 +46,60 @@ export function LoginForm() {
 
   return (
     <div className="space-y-6">
-      <Card className="border-slate-700 bg-slate-800/50 backdrop-blur p-6 sm:p-8 space-y-6">
+      <Card className="border-2 border-[#E67E22] bg-white p-6 sm:p-8 space-y-6 shadow-md">
+        <div className="border-b-2 border-[#E67E22] pb-3 mb-2">
+          <h2 className="text-2xl font-bold text-[#E67E22]">Acceso a SocIAleye</h2>
+          <p className="text-sm text-[#6B7280] mt-1">Ingresa con tus credenciales institucionales</p>
+        </div>
         <form onSubmit={handleLogin} className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-200">Email</label>
+            <label className="text-sm font-semibold text-[#1A1F2E]">Email Institucional</label>
             <Input
               type="email"
               placeholder="profesor@colegio.edu.pe"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-500"
+              className="bg-[#FAFBFC] border-2 border-[#E67E22]/30 text-[#1A1F2E] placeholder:text-[#6B7280] focus:border-[#E67E22]"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-200">Contraseña</label>
+            <label className="text-sm font-semibold text-[#1A1F2E]">Contraseña</label>
             <Input
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-500"
+              className="bg-[#FAFBFC] border-2 border-[#E67E22]/30 text-[#1A1F2E] placeholder:text-[#6B7280] focus:border-[#E67E22]"
             />
           </div>
 
           {error && (
-            <div className="flex gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-              <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-red-400">{error}</p>
+            <div className="flex gap-2 p-3 rounded-lg bg-[#D63031]/10 border-2 border-[#D63031]">
+              <AlertCircle className="w-5 h-5 text-[#D63031] flex-shrink-0 mt-0.5 font-bold" />
+              <p className="text-sm text-[#D63031] font-medium">{error}</p>
             </div>
           )}
 
-          <Button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+          <Button type="submit" disabled={loading} className="w-full bg-[#E67E22] hover:bg-[#D35400] text-white font-bold py-2 text-base">
             {loading ? "Ingresando..." : "Ingresar"}
           </Button>
         </form>
       </Card>
 
-      <Card className="border-slate-700 bg-slate-800/30 backdrop-blur p-4">
-        <p className="text-xs font-semibold text-slate-300 mb-3">Credenciales de Demo:</p>
-        <div className="space-y-2 text-xs text-slate-400">
-          <p>
-            <span className="text-blue-400 font-medium">Administrador:</span> admin@colegio.edu.pe / admin123
+      <Card className="border-2 border-[#E67E22]/30 bg-gradient-to-r from-[#FEF3E2] to-white p-4 shadow-md">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-1 h-6 bg-[#E67E22] rounded"></div>
+          <p className="text-sm font-bold text-[#1A1F2E]">Credenciales de Demostración:</p>
+        </div>
+        <div className="space-y-2.5 text-xs">
+          <p className="bg-white p-2 rounded border-l-4 border-[#E67E22]">
+            <span className="text-[#E67E22] font-bold">👨‍💼 Administrador:</span> <span className="text-[#6B7280]">admin@colegio.edu.pe / admin123</span>
           </p>
-          <p>
-            <span className="text-green-400 font-medium">Profesor:</span> profesor@colegio.edu.pe / prof123
+          <p className="bg-white p-2 rounded border-l-4 border-[#1B5E8F]">
+            <span className="text-[#1B5E8F] font-bold">👨‍🏫 Profesor:</span> <span className="text-[#6B7280]">profesor@colegio.edu.pe / prof123</span>
           </p>
-          <p>
-            <span className="text-purple-400 font-medium">Psicólogo:</span> psicologo@colegio.edu.pe / psico123
+          <p className="bg-white p-2 rounded border-l-4 border-[#2D7A4F]">
+            <span className="text-[#2D7A4F] font-bold">👨‍⚕️ Psicólogo:</span> <span className="text-[#6B7280]">psicologo@colegio.edu.pe / psico123</span>
           </p>
         </div>
       </Card>

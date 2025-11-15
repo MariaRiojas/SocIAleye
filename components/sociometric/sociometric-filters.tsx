@@ -21,10 +21,10 @@ export function SociometricMapFilters({ filters, onFiltersChange }: SociometricF
   const grades = filters.level === "primaria" ? primaryGrades : secondaryGrades
 
   return (
-    <Card className="border-slate-700 bg-slate-800/50 p-6">
+    <Card className="border-stone-700 bg-stone-800/50 p-6">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Nivel</label>
+          <label className="text-sm font-medium text-stone-300">Nivel</label>
           <div className="flex gap-2">
             {levels.map((level) => (
               <Button
@@ -33,7 +33,7 @@ export function SociometricMapFilters({ filters, onFiltersChange }: SociometricF
                 size="sm"
                 onClick={() => onFiltersChange({ ...filters, level, grade: "1" })}
                 className={
-                  filters.level === level ? "bg-blue-600 hover:bg-blue-700" : "border-slate-600 text-slate-300"
+                  filters.level === level ? "bg-orange-600 hover:bg-orange-700" : "border-stone-600 text-stone-300"
                 }
               >
                 {level.charAt(0).toUpperCase() + level.slice(1)}
@@ -43,11 +43,11 @@ export function SociometricMapFilters({ filters, onFiltersChange }: SociometricF
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Grado</label>
+          <label className="text-sm font-medium text-stone-300">Grado</label>
           <select
             value={filters.grade}
             onChange={(e) => onFiltersChange({ ...filters, grade: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm"
+            className="w-full px-3 py-2 rounded-lg bg-stone-700 border border-stone-600 text-white text-sm"
           >
             {grades.map((grade) => (
               <option key={grade} value={grade}>
@@ -58,11 +58,11 @@ export function SociometricMapFilters({ filters, onFiltersChange }: SociometricF
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Sección</label>
+          <label className="text-sm font-medium text-stone-300">Sección</label>
           <select
             value={filters.section}
             onChange={(e) => onFiltersChange({ ...filters, section: e.target.value })}
-            className="w-full px-3 py-2 rounded-lg bg-slate-700 border border-slate-600 text-white text-sm"
+            className="w-full px-3 py-2 rounded-lg bg-stone-700 border border-stone-600 text-white text-sm"
           >
             {sections.map((section) => (
               <option key={section} value={section}>
@@ -73,7 +73,7 @@ export function SociometricMapFilters({ filters, onFiltersChange }: SociometricF
         </div>
 
         <div className="flex items-end">
-          <Button className="w-full bg-blue-600 hover:bg-blue-700">Aplicar</Button>
+          <Button className="w-full bg-orange-600 hover:bg-orange-700">Aplicar</Button>
         </div>
       </div>
     </Card>

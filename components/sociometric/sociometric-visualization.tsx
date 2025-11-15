@@ -198,12 +198,12 @@ export function SociometricMapVisualization({
 
   return (
     <div ref={containerRef} className="w-full space-y-6 lg:space-y-8">
-      <Card className="border-slate-700 bg-slate-1000/50 p-4 sm:p-6">
+      <Card className="border-stone-700 bg-slate-1000/50 p-4 sm:p-6">
         <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 text-center">
           Estructura Social del Aula
         </h3>
         <div className="flex justify-center">
-          <div className="bg-slate-900 rounded-lg overflow-hidden max-w-full">
+          <div className="bg-stone-900 rounded-lg overflow-hidden max-w-full">
             <canvas
               ref={canvasRef}
               onClick={handleCanvasClick(canvasRef)}
@@ -221,19 +221,19 @@ export function SociometricMapVisualization({
         <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-3 sm:gap-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Alta aceptación</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Alta aceptación</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Aceptación media</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Aceptación media</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-red-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Baja aceptación</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Baja aceptación</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-8 sm:w-12 h-0.5 bg-green-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Positiva</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Positiva</span>
           </div>
           <div className="flex items-center gap-2">
             <div
@@ -243,17 +243,17 @@ export function SociometricMapVisualization({
                   "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
               }}
             />
-            <span className="text-slate-300 text-xs sm:text-sm">Rechazo</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Rechazo</span>
           </div>
         </div>
       </Card>
 
-      <Card className="border-slate-700 bg-slate-1000/50 p-4 sm:p-6">
+      <Card className="border-stone-700 bg-slate-1000/50 p-4 sm:p-6">
         <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6 text-center">
           Estructura Social del Patio
         </h3>
         <div className="flex justify-center">
-          <div className="bg-slate-900 rounded-lg overflow-hidden max-w-full">
+          <div className="bg-stone-900 rounded-lg overflow-hidden max-w-full">
             <canvas
               ref={canvasRef2}
               onClick={handleCanvasClick(canvasRef2)}
@@ -271,19 +271,19 @@ export function SociometricMapVisualization({
         <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-3 sm:gap-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-green-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Alta aceptación</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Alta aceptación</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-yellow-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Aceptación media</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Aceptación media</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-red-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Baja aceptación</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Baja aceptación</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-8 sm:w-12 h-0.5 bg-green-500" />
-            <span className="text-slate-300 text-xs sm:text-sm">Positiva</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Positiva</span>
           </div>
           <div className="flex items-center gap-2">
             <div
@@ -293,7 +293,7 @@ export function SociometricMapVisualization({
                   "repeating-linear-gradient(90deg, #ef4444 0, #ef4444 5px, transparent 5px, transparent 10px)",
               }}
             />
-            <span className="text-slate-300 text-xs sm:text-sm">Rechazo</span>
+            <span className="text-stone-300 text-xs sm:text-sm">Rechazo</span>
           </div>
         </div>
       </Card>

@@ -31,11 +31,14 @@ export default function Dashboard() {
   return (
     <DashboardLayout>
       <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
+        {/* Header con título naranja */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Dashboard General</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-orange-500">Dashboard General</h1>
           <p className="text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">
             Monitoreo de dinámicas sociales y alertas tempranas
           </p>
+          {/* Línea decorativa naranja */}
+          <div className="h-1 w-24 bg-orange-500 mt-3 rounded-full"></div>
         </div>
 
         <DashboardFilters filters={filters} onFiltersChange={setFilters} />
@@ -43,7 +46,7 @@ export default function Dashboard() {
         <ClassroomOverview filters={filters} />
       </div>
 
-      <AIChatbot pageContext={chatbotContext} />
+      
     </DashboardLayout>
   )
 }

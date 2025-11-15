@@ -4,78 +4,109 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(0.99 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(0.98 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.45 0.15 260);
+  /* =====================================================
+     TEMA OSCURO CON ACENTOS NARANJAS INSTITUCIONALES
+     
+     IMPORTANTE: Estas variables controlan TODOS los 
+     componentes de shadcn/ui (Card, Button, Input, etc.)
+     
+     Color Principal: #F97316 (orange-500)
+     Fondo Principal: #0F172A (slate-900)
+     ===================================================== */
+  
+  /* === FONDOS OSCUROS === */
+  --background: oklch(0.145 0.005 250);
+  --foreground: oklch(0.985 0.01 250);
+  
+  /* Cards y superficies oscuras */
+  --card: oklch(0.205 0.008 250);
+  --card-foreground: oklch(0.985 0.01 250);
+  
+  /* Popovers oscuros */
+  --popover: oklch(0.185 0.006 250);
+  --popover-foreground: oklch(0.985 0.01 250);
+  
+  /* === PRIMARY = NARANJA #F97316 === */
+  --primary: oklch(0.7 0.2 45);
   --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.92 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.45 0.15 260);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  
+  /* Secondary oscuro */
+  --secondary: oklch(0.269 0.01 250);
+  --secondary-foreground: oklch(0.985 0.01 250);
+  
+  /* Muted oscuro */
+  --muted: oklch(0.269 0.008 250);
+  --muted-foreground: oklch(0.708 0.01 250);
+  
+  /* Accent con tinte naranja */
+  --accent: oklch(0.32 0.02 45);
+  --accent-foreground: oklch(0.985 0.01 250);
+  
+  /* Destructive (rojo) */
+  --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.92 0 0);
-  --input: oklch(0.92 0 0);
-  --ring: oklch(0.45 0.15 260);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.45 0.15 260);
+  
+  /* === BORDES E INPUTS OSCUROS === */
+  --border: oklch(0.32 0.01 250);
+  --input: oklch(0.32 0.01 250);
+  --ring: oklch(0.7 0.2 45);
+  
+  /* === CHARTS CON PALETA NARANJA === */
+  --chart-1: oklch(0.7 0.2 45);
+  --chart-2: oklch(0.75 0.18 55);
+  --chart-3: oklch(0.6 0.22 35);
+  --chart-4: oklch(0.72 0.16 65);
+  --chart-5: oklch(0.65 0.14 30);
+  
+  --radius: 0.5rem;
+  
+  /* === SIDEBAR OSCURO === */
+  --sidebar: oklch(0.185 0.008 250);
+  --sidebar-foreground: oklch(0.985 0.01 250);
+  --sidebar-primary: oklch(0.7 0.2 45);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.92 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.45 0.15 260);
+  --sidebar-accent: oklch(0.269 0.01 250);
+  --sidebar-accent-foreground: oklch(0.985 0.01 250);
+  --sidebar-border: oklch(0.32 0.01 250);
+  --sidebar-ring: oklch(0.7 0.2 45);
 }
 
 .dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.65 0.2 260);
-  --primary-foreground: oklch(0.12 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.65 0.2 260);
-  --accent-foreground: oklch(0.12 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.95 0 0);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.65 0.2 260);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.65 0.2 260);
-  --sidebar-primary-foreground: oklch(0.95 0 0);
-  --sidebar-accent: oklch(0.25 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.25 0 0);
-  --sidebar-ring: oklch(0.65 0.2 260);
+  --background: oklch(0.145 0.005 250);
+  --foreground: oklch(0.985 0.01 250);
+  --card: oklch(0.205 0.008 250);
+  --card-foreground: oklch(0.985 0.01 250);
+  --popover: oklch(0.185 0.006 250);
+  --popover-foreground: oklch(0.985 0.01 250);
+  --primary: oklch(0.7 0.2 45);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.269 0.01 250);
+  --secondary-foreground: oklch(0.985 0.01 250);
+  --muted: oklch(0.269 0.008 250);
+  --muted-foreground: oklch(0.708 0.01 250);
+  --accent: oklch(0.32 0.02 45);
+  --accent-foreground: oklch(0.985 0.01 250);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.32 0.01 250);
+  --input: oklch(0.32 0.01 250);
+  --ring: oklch(0.7 0.2 45);
+  --chart-1: oklch(0.7 0.2 45);
+  --chart-2: oklch(0.75 0.18 55);
+  --chart-3: oklch(0.6 0.22 35);
+  --chart-4: oklch(0.72 0.16 65);
+  --chart-5: oklch(0.65 0.14 30);
+  --sidebar: oklch(0.185 0.008 250);
+  --sidebar-foreground: oklch(0.985 0.01 250);
+  --sidebar-primary: oklch(0.7 0.2 45);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.269 0.01 250);
+  --sidebar-accent-foreground: oklch(0.985 0.01 250);
+  --sidebar-border: oklch(0.32 0.01 250);
+  --sidebar-ring: oklch(0.7 0.2 45);
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -120,5 +151,262 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* =====================================================
+   ESTILOS GLOBALES ADICIONALES PARA TEMA OSCURO
+   ===================================================== */
+
+/* Forzar esquema de color oscuro */
+html {
+  color-scheme: dark;
+}
+
+/* Asegurar que el body tenga fondo oscuro */
+body {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+
+/* === FORMULARIOS CON FONDO OSCURO === */
+select,
+select option {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Focus con naranja */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #f97316 !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3) !important;
+  outline: none !important;
+}
+
+/* === SCROLLBAR OSCURO === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* === SELECCIÓN DE TEXTO CON NARANJA === */
+::selection {
+  background-color: rgba(249, 115, 22, 0.3);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: rgba(249, 115, 22, 0.3);
+  color: #ffffff;
+}
+
+/* === CLASES UTILITARIAS PERSONALIZADAS === */
+
+/* Botón naranja primario */
+.btn-orange {
+  background-color: #f97316 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+.btn-orange:hover {
+  background-color: #ea580c !important;
+}
+
+.btn-orange:active {
+  background-color: #c2410c !important;
+}
+
+/* Texto naranja */
+.text-accent-orange {
+  color: #fb923c !important;
+}
+
+/* Borde naranja */
+.border-accent-orange {
+  border-color: #f97316 !important;
+}
+
+/* Fondo naranja transparente */
+.bg-orange-glow {
+  background-color: rgba(249, 115, 22, 0.1) !important;
+}
+
+/* Sombra naranja */
+.shadow-orange {
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.25) !important;
+}
+
+/* Gradiente naranja */
+.gradient-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%) !important;
+}
+
+/* === ANIMACIONES === */
+@keyframes pulse-orange {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+  }
+}
+
+.animate-pulse-orange {
+  animation: pulse-orange 2s infinite;
+}
+
+/* === TARJETAS Y CONTENEDORES === */
+
+/* Tarjeta con borde izquierdo naranja */
+.card-orange-left {
+  border-left: 4px solid #f97316 !important;
+}
+
+/* Tarjeta con hover naranja */
+.card-hover-orange:hover {
+  border-color: rgba(249, 115, 22, 0.5) !important;
+}
+
+/* Header con gradiente naranja */
+.header-orange-gradient {
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 100%) !important;
+}
+
+/* === BADGES === */
+.badge-critical {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+.badge-high {
+  background-color: rgba(249, 115, 22, 0.2) !important;
+  color: #fb923c !important;
+  border: 1px solid rgba(249, 115, 22, 0.3) !important;
+}
+
+.badge-medium {
+  background-color: rgba(234, 179, 8, 0.2) !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(234, 179, 8, 0.3) !important;
+}
+
+.badge-low {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+}
+
+/* === TABLAS === */
+table {
+  background-color: #1e293b !important;
+}
+
+th {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+td {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-color: #475569 !important;
+}
+
+tr:hover td {
+  background-color: #334155 !important;
+}
+
+/* === TOOLTIPS === */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid #475569;
+  z-index: 1000;
+}
+
+/* === LOADING STATES === */
+.skeleton {
+  background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .btn-orange {
+    padding: 8px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* === PRINT STYLES === */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .no-print {
+    display: none !important;
   }
 }

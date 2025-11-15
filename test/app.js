@@ -803,7 +803,7 @@ function drawSociometricNetwork(ctx, width, height) {
       ctx.strokeRect(-size, -size, size * 2, size * 2);
     } else if (node.type === 'leader') {
       // Star
-      ctx.fillStyle = '#2563EB';
+      ctx.fillStyle = '#EA580C';
       drawStar(ctx, 0, 0, 5, size * 1.5, size * 0.7);
       ctx.fill();
       ctx.strokeStyle = '#1E40AF';
@@ -939,7 +939,7 @@ function initializeAnalytics() {
         datasets: [{
           label: 'Incidentes digitales',
           data: [2, 4, 3, 7, 5],
-          borderColor: '#2563EB',
+          borderColor: '#EA580C',
           backgroundColor: 'rgba(37, 99, 235, 0.1)',
           tension: 0.4,
           fill: true

@@ -163,14 +163,14 @@ export default function ProfilesPage() {
       <div className="space-y-4 sm:space-y-6 px-4 sm:px-0">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white">Perfiles de Estudiantes</h1>
-          <p className="text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">
+          <p className="text-stone-400 mt-1 sm:mt-2 text-sm sm:text-base">
             Análisis detallado de riesgo conductual, emocional, social y cognitivo
           </p>
         </div>
 
         <DashboardFilters filters={filters} onFiltersChange={setFilters} />
 
-        <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+        <Card className="border-stone-700 bg-stone-800/50 p-4 sm:p-6">
           <h3 className="text-base sm:text-lg font-semibold text-white mb-4 sm:mb-6">
             Estudiantes - {filters.level.charAt(0).toUpperCase() + filters.level.slice(1)} {filters.grade}° Sección{" "}
             {filters.section}
@@ -183,10 +183,10 @@ export default function ProfilesPage() {
                 <div
                   key={student.id}
                   onClick={() => openStudentProfile(student)}
-                  className="p-4 sm:p-5 rounded-lg bg-slate-700/50 border border-slate-600 hover:border-slate-500 hover:bg-slate-700/70 transition-all cursor-pointer group"
+                  className="p-4 sm:p-5 rounded-lg bg-stone-700/50 border border-stone-600 hover:border-stone-500 hover:bg-stone-700/70 transition-all cursor-pointer group"
                 >
                   <div className="mb-3">
-                    <p className="font-semibold text-white text-sm sm:text-base group-hover:text-blue-300 transition-colors">
+                    <p className="font-semibold text-white text-sm sm:text-base group-hover:text-orange-300 transition-colors">
                       {student.name}
                     </p>
                     <Badge className={`${getRiskColor(riskLevel)} border mt-2 text-xs`}>Riesgo: {riskLevel}</Badge>
@@ -194,15 +194,15 @@ export default function ProfilesPage() {
 
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
-                      <p className="text-slate-400">Conducta</p>
+                      <p className="text-stone-400">Conducta</p>
                       <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.conductual.status)}`}></div>
                     </div>
                     <div>
-                      <p className="text-slate-400">Social</p>
+                      <p className="text-stone-400">Social</p>
                       <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.social.status)}`}></div>
                     </div>
                     <div>
-                      <p className="text-slate-400">Emocional</p>
+                      <p className="text-stone-400">Emocional</p>
                       <div
                         className={`w-3 h-3 rounded-full ${
                           student.profile.emocional.capacidadEmpatica < 40
@@ -214,7 +214,7 @@ export default function ProfilesPage() {
                       ></div>
                     </div>
                     <div>
-                      <p className="text-slate-400">Cognitivo</p>
+                      <p className="text-stone-400">Cognitivo</p>
                       <div
                         className={`w-3 h-3 rounded-full ${
                           student.profile.cognitivo.percepcionDocente === "minimiza"
@@ -227,7 +227,7 @@ export default function ProfilesPage() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-3 pt-3 border-t border-slate-600">
+                  <p className="text-xs text-stone-400 mt-3 pt-3 border-t border-stone-600">
                     Click para ver perfil detallado
                   </p>
                 </div>
@@ -236,24 +236,24 @@ export default function ProfilesPage() {
           </div>
         </Card>
 
-        <Card className="border-slate-700 bg-slate-800/50 p-4 sm:p-6">
+        <Card className="border-stone-700 bg-stone-800/50 p-4 sm:p-6">
           <h4 className="text-sm sm:text-base font-semibold text-white mb-3">Leyenda de Dimensiones</h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="text-slate-300">Conductual - Registro de incidentes</span>
+              <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+              <span className="text-stone-300">Conductual - Registro de incidentes</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-              <span className="text-slate-300">Emocional - Autoevaluación 0-100</span>
+              <span className="text-stone-300">Emocional - Autoevaluación 0-100</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500"></div>
-              <span className="text-slate-300">Social - Interacciones académicas</span>
+              <span className="text-stone-300">Social - Interacciones académicas</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-              <span className="text-slate-300">Cognitivo - Percepción docente</span>
+              <span className="text-stone-300">Cognitivo - Percepción docente</span>
             </div>
           </div>
         </Card>
@@ -268,7 +268,7 @@ export default function ProfilesPage() {
         }}
       />
 
-      <AIChatbot pageContext={chatbotContext} />
+      
     </DashboardLayout>
   )
 }

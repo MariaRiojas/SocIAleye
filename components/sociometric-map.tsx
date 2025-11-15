@@ -62,7 +62,7 @@ export function SociometricMap() {
     <Card className="border-border bg-background p-8 space-y-6">
       <div className="space-y-2">
         <h3 className="text-2xl font-bold flex items-center gap-2">
-          <Users className="w-6 h-6 text-blue-400" />
+          <Users className="w-6 h-6 text-orange-400" />
           Mapa Sociométrico Interactivo
         </h3>
         <p className="text-muted-foreground">
@@ -189,8 +189,8 @@ export function SociometricMap() {
               onClick={() => setSelectedStudent(student.id)}
               className={`p-3 rounded-lg border cursor-pointer transition-all ${
                 selectedStudent === student.id
-                  ? "border-blue-500 bg-blue-500/10"
-                  : "border-border hover:border-blue-500/50"
+                  ? "border-orange-500 bg-orange-500/10"
+                  : "border-border hover:border-orange-500/50"
               }`}
             >
               <div className="flex items-center justify-between">

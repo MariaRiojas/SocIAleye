@@ -93,7 +93,7 @@ export default function DemoPage() {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            <Button size="lg" className="bg-orange-600 hover:bg-orange-700">
               Solicitar Demo Completa
             </Button>
             <Button size="lg" variant="outline">
