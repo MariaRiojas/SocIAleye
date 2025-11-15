@@ -28,8 +28,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     { href: "/dashboard", label: "Dashboard", icon: Home },
     { href: "/sociometric-map", label: "Mapa Sociométrico", icon: Map },
     { href: "/alerts", label: "Alertas Tempranas", icon: AlertTriangle },
-    { href: "/profiles", label: "Perfiles", icon: Users },
-    { href: "/reports", label: "Reportes", icon: AlertTriangle },
+    { href: "/students", label: "Gestión de Estudiantes", icon: Users },
   ]
 
   const adminNavItems = [

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SociaiEye - Plataforma de Prevención de Bullying</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .sessions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .session-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .session-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+        }
+
+        .session-card.student {
+            border-top: 5px solid #10B981;
+        }
+
+        .session-card.specialist {
+            border-top: 5px solid #2563EB;
+        }
+
+        .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .session-card h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #1F2937;
+        }
+
+        .session-card p {
+            color: #6B7280;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            color: #6B7280;
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .session-card.specialist .features-list li:before {
+            color: #2563EB;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .button-student {
+            background: #10B981;
+            color: white;
+        }
+
+        .button-student:hover {
+            background: #059669;
+        }
+
+        .button-specialist {
+            background: #2563EB;
+            color: white;
+        }
+
+        .button-specialist:hover {
+            background: #1D4ED8;
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.1);
+            border-left: 4px solid white;
+            padding: 15px;
+            margin-top: 30px;
+            color: white;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .sessions {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #6B7280;
+        }
+
+        .close-btn:hover {
+            color: #1F2937;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1F2937;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #E5E7EB;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .button-group button {
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background: #E5E7EB;
+            color: #1F2937;
+        }
+
+        .btn-secondary:hover {
+            background: #D1D5DB;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 SociaiEye</h1>
+            <p>Ecosistema inteligente para prevenir bullying antes de que ocurra</p>
+        </div>
+
+        <div class="sessions">
+            <!-- SESIÓN REPORTANTE -->
+            <div class="session-card student">
+                <div class="icon">👤</div>
+                <h2>Reportar Incidencia</h2>
+                <p><strong>Para estudiantes y observadores</strong></p>
+                <p>Reporte seguro, anónimo y confidencial sobre incidencias de bullying.</p>
+
+                <ul class="features-list">
+                    <li>Completamente anónimo</li>
+                    <li>Sin necesidad de login</li>
+                    <li>3-5 minutos para reportar</li>
+                    <li>Confidencialidad garantizada</li>
+                    <li>Código de seguimiento</li>
+                </ul>
+
+                <button class="button button-student" onclick="openStudentModal()">
+                    Reportar Ahora
+                </button>
+            </div>
+
+            <!-- SESIÓN ESPECIALISTA -->
+            <div class="session-card specialist">
+                <div class="icon">🔐</div>
+                <h2>Acceso Especialista</h2>
+                <p><strong>Para psicólogos y docentes</strong></p>
+                <p>Dashboard profesional con análisis avanzado y mapa sociométrico interactivo.</p>
+
+                <ul class="features-list">
+                    <li>Dashboard de casos</li>
+                    <li>Análisis con IA</li>
+                    <li>Mapa sociométrico</li>
+                    <li>Detección de patrones</li>
+                    <li>Recomendaciones automáticas</li>
+                </ul>
+
+                <button class="button button-specialist" onclick="openSpecialistModal()">
+                    Ingresar Panel
+                </button>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>ℹ️ Información de Privacidad:</strong> SociaiEye cumple con GDPR y normativas de protección de datos de menores. Todos los reportes son procesados de forma confidencial.
+        </div>
+    </div>
+
+    <!-- MODAL REPORTANTE -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeStudentModal()">&times;</span>
+            <h2>📋 Reportar Incidencia</h2>
+            <p style="color: #6B7280; margin-top: 10px; margin-bottom: 20px;">Tu reporte es seguro y confidencial</p>
+
+            <form onsubmit="submitStudentReport(event)">
+                <div class="form-group">
+                    <label>¿Cuál es tu situación?</label>
+                    <select required>
+                        <option value="">-- Selecciona una opción --</option>
+                        <option value="1">Estoy siendo acosado/a</option>
+                        <option value="2">Acosé a alguien (me arrepiento)</option>
+                        <option value="3">Vi bullying a otro estudiante</option>
+                        <option value="4">Un amigo está siendo acosado/a</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>¿En qué grado estudias?</label>
+                    <select required>
+                        <option value="">-- Selecciona un grado --</option>
+                        <option value="1">1ro Secundaria</option>
+                        <option value="2">2do Secundaria</option>
+                        <option value="3">3ro Secundaria</option>
+                        <option value="4">4to Secundaria</option>
+                        <option value="5">5to Secundaria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Cuándo pasó?</label>
+                    <select required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="today">Hoy</option>
+                        <option value="week">Esta semana</option>
+                        <option value="month">Este mes</option>
+                        <option value="older">Hace más tiempo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Dónde ocurrió?</label>
+                    <select required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="classroom">En el aula</option>
+                        <option value="playground">En el recreo</option>
+                        <option value="entrance">Entrada/salida</option>
+                        <option value="online">En línea</option>
+                        <option value="other">Otro lugar</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Cuéntanos qué pasó</label>
+                    <textarea placeholder="Describe con el máximo detalle lo que viste u observaste..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Nombres involucrados? (opcional)</label>
+                    <input type="text" placeholder="Puedes dejar esto en blanco si prefieres">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="button btn-secondary" onclick="closeStudentModal()">Cancelar</button>
+                    <button type="submit" class="button button-student">Enviar Reporte</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ESPECIALISTA -->
+    <div id="specialistModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeSpecialistModal()">&times;</span>
+            <h2>🔐 Acceso Especialista</h2>
+            <p style="color: #6B7280; margin-top: 10px; margin-bottom: 20px;">Ingresa con tus credenciales de institución</p>
+
+            <form onsubmit="submitSpecialistLogin(event)">
+                <div class="form-group">
+                    <label>Correo Institucional</label>
+                    <input type="email" placeholder="ejemplo@institucion.edu.pe" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="Tu contraseña" required>
+                </div>
+
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; font-weight: normal;">
+                        <input type="checkbox" style="width: auto; margin-right: 8px;"> Recuerda mis datos
+                    </label>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="button btn-secondary" onclick="closeSpecialistModal()">Cancelar</button>
+                    <button type="submit" class="button button-specialist">Ingresar</button>
+                </div>
+            </form>
+
+            <p style="text-align: center; margin-top: 20px; color: #6B7280; font-size: 0.9em;">
+                ¿No tienes acceso? <a href="#" style="color: #2563EB; text-decoration: none;">Solicitar credenciales</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openStudentModal() {
+            document.getElementById('studentModal').classList.add('active');
+        }
+
+        function closeStudentModal() {
+            document.getElementById('studentModal').classList.remove('active');
+        }
+
+        function openSpecialistModal() {
+            document.getElementById('specialistModal').classList.add('active');
+        }
+
+        function closeSpecialistModal() {
+            document.getElementById('specialistModal').classList.remove('active');
+        }
+
+        function submitStudentReport(event) {
+            event.preventDefault();
+            const code = 'SCI-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            alert('✓ ¡Tu reporte ha sido enviado!\n\nCódigo de seguimiento: ' + code + '\n\nUn especialista lo revisará pronto.');
+            closeStudentModal();
+            event.target.reset();
+        }
+
+        function submitSpecialistLogin(event) {
+            event.preventDefault();
+            alert('⚠️ Demo: En producción, esto validaría credenciales reales.\n\nAcceso a Dashboard de Especialista con:\n✓ Lista de casos\n✓ Mapa sociométrico\n✓ Análisis IA\n✓ Recomendaciones');
+            closeSpecialistModal();
+        }
+
+        // Cerrar modal al hacer click fuera
+        window.onclick = function(event) {
+            const studentModal = document.getElementById('studentModal');
+            const specialistModal = document.getElementById('specialistModal');
+
+            if (event.target == studentModal) {
+                closeStudentModal();
+            }
+            if (event.target == specialistModal) {
+                closeSpecialistModal();
+            }
+        }
+    </script>
+</body>
+</html>

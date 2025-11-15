@@ -10,6 +10,12 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Download, TrendingUp, TrendingDown } from "lucide-react"
+import {
+  getRiskLevel,
+  getDimensionColor,
+  getProgressBarColor,
+  getSeverityColor,
+} from "@/lib/student-utils"
 
 const STUDENT_REPORTS = [
   {
@@ -160,31 +166,6 @@ export default function ReportsPage() {
 
   const filteredStudents = STUDENT_REPORTS.filter((s) => s.grade === filters.grade && s.section === filters.section)
 
-  const getRiskLevel = (profile: (typeof STUDENT_REPORTS)[0]["profile"]) => {
-    const riskFactors = [
-      profile.conductual.status === "red" ? 1 : profile.conductual.status === "yellow" ? 0.5 : 0,
-      profile.social.status === "red" ? 1 : profile.social.status === "yellow" ? 0.5 : 0,
-      profile.emocional.capacidadEmpatica < 40 ? 1 : profile.emocional.capacidadEmpatica < 70 ? 0.5 : 0,
-      profile.cognitivo.percepcionDocente === "minimiza"
-        ? 1
-        : profile.cognitivo.percepcionDocente === "neutral"
-          ? 0.5
-          : 0,
-    ]
-    const totalRisk = riskFactors.reduce((a, b) => a + b, 0) / riskFactors.length
-    return totalRisk > 0.7 ? "CRÍTICO" : totalRisk > 0.4 ? "ALTO" : totalRisk > 0.2 ? "MEDIO" : "BAJO"
-  }
-
-  const getDimensionColor = (status: "green" | "yellow" | "red") => {
-    switch (status) {
-      case "green":
-        return "bg-green-500/20 text-green-400 border-green-500/30"
-      case "yellow":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-      case "red":
-        return "bg-red-500/20 text-red-400 border-red-500/30"
-    }
-  }
 
   const getTrendIcon = (tendencia: string) => {
     if (tendencia === "subiendo" || tendencia === "mejorando") {
@@ -285,15 +266,7 @@ export default function ReportsPage() {
                           <p className="text-white font-medium text-sm">{incident.tipo}</p>
                           <p className="text-slate-400 text-xs mt-1">{incident.fecha}</p>
                         </div>
-                        <Badge
-                          className={`text-xs ${
-                            incident.severidad === "alta"
-                              ? "bg-red-500/20 text-red-400"
-                              : incident.severidad === "media"
-                                ? "bg-yellow-500/20 text-yellow-400"
-                                : "bg-green-500/20 text-green-400"
-                          }`}
-                        >
+                        <Badge className={`text-xs ${getSeverityColor(incident.severidad)}`}>
                           {incident.severidad.charAt(0).toUpperCase() + incident.severidad.slice(1)}
                         </Badge>
                       </div>
@@ -317,13 +290,7 @@ export default function ReportsPage() {
                     <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.score}</p>
                     <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
                       <div
-                        className={`h-2 rounded-full ${
-                          selectedStudent.profile.emocional.score >= 70
-                            ? "bg-green-500"
-                            : selectedStudent.profile.emocional.score >= 40
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                        }`}
+                        className={`h-2 rounded-full ${getProgressBarColor(selectedStudent.profile.emocional.score)}`}
                         style={{ width: `${selectedStudent.profile.emocional.score}%` }}
                       ></div>
                     </div>
@@ -335,13 +302,7 @@ export default function ReportsPage() {
                     </p>
                     <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
                       <div
-                        className={`h-2 rounded-full ${
-                          selectedStudent.profile.emocional.capacidadEmpatica >= 70
-                            ? "bg-green-500"
-                            : selectedStudent.profile.emocional.capacidadEmpatica >= 40
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                        }`}
+                        className={`h-2 rounded-full ${getProgressBarColor(selectedStudent.profile.emocional.capacidadEmpatica)}`}
                         style={{ width: `${selectedStudent.profile.emocional.capacidadEmpatica}%` }}
                       ></div>
                     </div>
@@ -351,13 +312,7 @@ export default function ReportsPage() {
                     <p className="text-2xl font-bold text-white">{selectedStudent.profile.emocional.autocontrol}</p>
                     <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
                       <div
-                        className={`h-2 rounded-full ${
-                          selectedStudent.profile.emocional.autocontrol >= 70
-                            ? "bg-green-500"
-                            : selectedStudent.profile.emocional.autocontrol >= 40
-                              ? "bg-yellow-500"
-                              : "bg-red-500"
-                        }`}
+                        className={`h-2 rounded-full ${getProgressBarColor(selectedStudent.profile.emocional.autocontrol)}`}
                         style={{ width: `${selectedStudent.profile.emocional.autocontrol}%` }}
                       ></div>
                     </div>
@@ -427,13 +382,7 @@ export default function ReportsPage() {
                     </p>
                     <div className="w-full bg-slate-600 rounded-full h-2 mt-2">
                       <div
-                        className={`h-2 rounded-full ${
-                          selectedStudent.profile.cognitivo.nivelJustificacion >= 70
-                            ? "bg-red-500"
-                            : selectedStudent.profile.cognitivo.nivelJustificacion >= 40
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
-                        }`}
+                        className={`h-2 rounded-full ${getProgressBarColor(selectedStudent.profile.cognitivo.nivelJustificacion, true)}`}
                         style={{ width: `${selectedStudent.profile.cognitivo.nivelJustificacion}%` }}
                       ></div>
                     </div>

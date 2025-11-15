@@ -9,6 +9,8 @@ import { StudentProfileModal } from "@/components/profiles/student-profile-modal
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { AIChatbot } from "@/components/ai-chatbot/ai-chatbot"
+import { getRiskLevel, getRiskColor, getStatusIndicatorColor } from "@/lib/student-utils"
+import { StudentProfile } from "@/lib/student-types"
 
 const STUDENT_PROFILES = [
   {
@@ -148,33 +150,6 @@ export default function ProfilesPage() {
 
   if (isLoading || !user) return null
 
-  const getRiskLevel = (profile: (typeof STUDENT_PROFILES)[0]["profile"]) => {
-    const riskFactors = [
-      profile.conductual.status === "red" ? 1 : profile.conductual.status === "yellow" ? 0.5 : 0,
-      profile.social.status === "red" ? 1 : profile.social.status === "yellow" ? 0.5 : 0,
-      profile.emocional.capacidadEmpatica < 40 ? 1 : profile.emocional.capacidadEmpatica < 70 ? 0.5 : 0,
-      profile.cognitivo.percepcionDocente === "minimiza"
-        ? 1
-        : profile.cognitivo.percepcionDocente === "neutral"
-          ? 0.5
-          : 0,
-    ]
-    const totalRisk = riskFactors.reduce((a, b) => a + b, 0) / riskFactors.length
-    return totalRisk > 0.7 ? "CRÍTICO" : totalRisk > 0.4 ? "ALTO" : totalRisk > 0.2 ? "MEDIO" : "BAJO"
-  }
-
-  const getRiskColor = (level: string) => {
-    switch (level) {
-      case "CRÍTICO":
-        return "bg-red-500/20 text-red-400 border-red-500/30"
-      case "ALTO":
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
-      case "MEDIO":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-      default:
-        return "bg-green-500/20 text-green-400 border-green-500/30"
-    }
-  }
 
   const openStudentProfile = (student: (typeof STUDENT_PROFILES)[0]) => {
     setSelectedStudent(student)
@@ -220,37 +195,21 @@ export default function ProfilesPage() {
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     <div>
                       <p className="text-slate-400">Conducta</p>
-                      <div
-                        className={`w-3 h-3 rounded-full ${
-                          student.profile.conductual.status === "red"
-                            ? "bg-red-500"
-                            : student.profile.conductual.status === "yellow"
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
-                        }`}
-                      ></div>
+                      <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.conductual.status)}`}></div>
                     </div>
                     <div>
                       <p className="text-slate-400">Social</p>
-                      <div
-                        className={`w-3 h-3 rounded-full ${
-                          student.profile.social.status === "red"
-                            ? "bg-red-500"
-                            : student.profile.social.status === "yellow"
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
-                        }`}
-                      ></div>
+                      <div className={`w-3 h-3 rounded-full ${getStatusIndicatorColor(student.profile.social.status)}`}></div>
                     </div>
                     <div>
                       <p className="text-slate-400">Emocional</p>
                       <div
                         className={`w-3 h-3 rounded-full ${
                           student.profile.emocional.capacidadEmpatica < 40
-                            ? "bg-red-500"
+                            ? getStatusIndicatorColor("red")
                             : student.profile.emocional.capacidadEmpatica < 70
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
+                              ? getStatusIndicatorColor("yellow")
+                              : getStatusIndicatorColor("green")
                         }`}
                       ></div>
                     </div>
@@ -259,10 +218,10 @@ export default function ProfilesPage() {
                       <div
                         className={`w-3 h-3 rounded-full ${
                           student.profile.cognitivo.percepcionDocente === "minimiza"
-                            ? "bg-red-500"
+                            ? getStatusIndicatorColor("red")
                             : student.profile.cognitivo.percepcionDocente === "neutral"
-                              ? "bg-yellow-500"
-                              : "bg-green-500"
+                              ? getStatusIndicatorColor("yellow")
+                              : getStatusIndicatorColor("green")
                         }`}
                       ></div>
                     </div>

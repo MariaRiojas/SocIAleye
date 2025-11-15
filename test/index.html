@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SociaiEye - Plataforma Contra el Bullying</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-blue-primary: #2563EB;
+  --color-green-primary: #10B981;
+  --color-yellow-accent: #F59E0B;
+  --color-red-critical: #DC2626;
+  --color-orange-high: #EF4444;
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --radius-base: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* Header */
+.header {
+  background: white;
+  border-bottom: 1px solid var(--color-card-border);
+  padding: var(--space-16) var(--space-32);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-blue-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-32);
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--color-blue-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.btn {
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-background);
+}
+
+.btn-primary {
+  background: var(--color-blue-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1E40AF;
+}
+
+/* Critical Alert Banner */
+.critical-alert {
+  background: var(--color-red-critical);
+  color: white;
+  padding: var(--space-16) var(--space-32);
+  text-align: center;
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+}
+
+.critical-alert.active {
+  display: flex;
+}
+
+/* Main Layout */
+.main-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  height: calc(100vh - 70px);
+  gap: 0;
+}
+
+/* Chat Section */
+.chat-section {
+  background: var(--color-gray-200);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-card-border);
+}
+
+.chat-header {
+  background: white;
+  padding: var(--space-20);
+  border-bottom: 1px solid var(--color-card-border);
+}
+
+.chat-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-8);
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.progress-indicator {
+  flex: 1;
+  height: 6px;
+  background: var(--color-background);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-green-primary);
+  transition: width 0.3s;
+  width: 0;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.message {
+  display: flex;
+  gap: var(--space-12);
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.message.bot .message-avatar {
+  background: var(--color-blue-primary);
+}
+
+.message.user .message-avatar {
+  background: var(--color-green-primary);
+}
+
+.message-content {
+  max-width: 75%;
+}
+
+.message-bubble {
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
+}
+
+.message.bot .message-bubble {
+  background: white;
+  color: var(--color-text);
+}
+
+.message.user .message-bubble {
+  background: var(--color-green-primary);
+  color: white;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: var(--space-12);
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-secondary);
+  animation: typing 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Input Section */
+.input-section {
+  padding: var(--space-20);
+  background: white;
+  border-top: 1px solid var(--color-card-border);
+}
+
+.input-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.input-button {
+  padding: var(--space-12) var(--space-16);
+  background: white;
+  border: 2px solid var(--color-blue-primary);
+  color: var(--color-blue-primary);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.input-button:hover {
+  background: var(--color-blue-primary);
+  color: white;
+}
+
+.input-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  cursor: pointer;
+}
+
+.checkbox-option input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.text-input {
+  width: 100%;
+  padding: var(--space-12);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+.date-input {
+  width: 100%;
+  padding: var(--space-12);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+.submit-button {
+  width: 100%;
+  padding: var(--space-12);
+  background: var(--color-green-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: var(--space-12);
+}
+
+.submit-button:hover {
+  background: #059669;
+}
+
+/* Summary Panel */
+.summary-section {
+  background: white;
+  overflow-y: auto;
+  padding: var(--space-32);
+}
+
+.summary-header {
+  margin-bottom: var(--space-32);
+}
+
+.summary-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-8);
+}
+
+.user-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  margin-bottom: var(--space-24);
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-12);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.empty-value {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.dimensions-grid {
+  display: grid;
+  gap: var(--space-20);
+  margin-bottom: var(--space-24);
+}
+
+.dimension-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+}
+
+.dimension-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.dimension-icon {
+  font-size: 1.75rem;
+}
+
+.dimension-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.dimension-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.dimension-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-8);
+  background: white;
+  border-radius: var(--radius-base);
+}
+
+.item-label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.item-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.severity-card {
+  background: linear-gradient(135deg, var(--color-green-primary) 0%, var(--color-blue-primary) 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  text-align: center;
+  margin-bottom: var(--space-24);
+}
+
+.severity-card.moderate {
+  background: linear-gradient(135deg, var(--color-yellow-accent) 0%, #D97706 100%);
+}
+
+.severity-card.high {
+  background: linear-gradient(135deg, var(--color-orange-high) 0%, #DC2626 100%);
+}
+
+.severity-card.critical {
+  background: linear-gradient(135deg, var(--color-red-critical) 0%, #991B1B 100%);
+}
+
+.severity-level {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-8);
+}
+
+.severity-description {
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  flex: 1;
+  padding: var(--space-12) var(--space-20);
+  background: white;
+  border: 2px solid var(--color-blue-primary);
+  color: var(--color-blue-primary);
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: var(--color-blue-primary);
+  color: white;
+}
+
+.btn-solid {
+  flex: 1;
+  padding: var(--space-12) var(--space-20);
+  background: var(--color-green-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-solid:hover {
+  background: #059669;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-section {
+    display: none;
+  }
+  
+  .summary-section.mobile-visible {
+    display: block;
+  }
+}
+
+
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="landing-container">
+            <div class="landing-logo">SociaiEye</div>
+            <h1 class="landing-title">Plataforma de Prevención e Intervención del Bullying</h1>
+            <p class="landing-subtitle">Sistema integral con análisis sociométrico avanzado e IA</p>
+            
+            <div class="session-cards">
+                <div class="session-card reporter-card" onclick="startReporterSession()">
+                    <div class="session-icon">👤</div>
+                    <h2>Reportar Incidencia</h2>
+                    <p>Sesión confidencial para estudiantes y observadores</p>
+                    <div class="session-badge">Anónimo &amp; Seguro</div>
+                </div>
+                
+                <div class="session-card specialist-card" onclick="showSpecialistLogin()">
+                    <div class="session-icon">🔐</div>
+                    <h2>Acceso Especialista</h2>
+                    <p>Dashboard profesional con análisis y mapa sociométrico</p>
+                    <div class="session-badge">Requiere Autenticación</div>
+                </div>
+            </div>
+            
+            <div class="landing-privacy">
+                <p>🔒 Tu privacidad es nuestra prioridad. Todos los reportes son encriptados y confidenciales.</p>
+            </div>
+            
+            <div class="landing-footer">
+                <p>Contacto: ayuda@sociaieye.com | Tel: (123) 456-7890</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specialist Login -->
+    <div id="specialistLogin" class="specialist-login hidden">
+        <div class="login-container">
+            <div class="login-header">
+                <span class="back-button" onclick="backToLanding()">← Volver</span>
+                <div class="login-logo">SociaiEye</div>
+            </div>
+            <h2>Acceso Especialista</h2>
+            <div class="login-form">
+                <div class="form-group">
+                    <label>Email o Usuario</label>
+                    <input type="text" id="loginEmail" class="form-control" placeholder="usuario@colegio.edu">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="authenticateSpecialist()">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reporter Session -->
+    <div id="reporterSession" class="hidden">
+    <header class="header">
+        <div class="logo">SociaiEye <span style="font-size: 0.7rem; font-weight: 500; color: var(--color-green-primary);">| Reportante</span></div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="backToLanding()">Salir</button>
+        </div>
+    </header>
+        <div class="logo">SociaiEye</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Reportar</a></li>
+                <li><a href="#">Mis Reportes</a></li>
+                <li><a href="#">Ayuda</a></li>
+                <li><a href="#">Perfil</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <button class="btn btn-secondary">Descargar Guía</button>
+            <button class="btn btn-primary">Ayuda</button>
+        </div>
+    </header>
+
+    <!-- Critical Alert Banner -->
+    <div class="critical-alert" id="criticalAlert">
+        <span>⚠️</span>
+        <span>CASO CRÍTICO - Requiere intervención inmediata. Se recomienda contactar al psicólogo escolar.</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <h2>Asistente de Reporte de Incidencias</h2>
+                <p style="color: var(--color-text-secondary); font-size: 0.9rem;">Responde a las preguntas para registrar la incidencia de forma segura y confidencial</p>
+                <div class="progress-bar">
+                    <span class="progress-text" id="progressText">Paso 0 de 9</span>
+                    <div class="progress-indicator">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be added here dynamically -->
+            </div>
+            
+            <div class="input-section" id="inputSection">
+                <!-- Input controls will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary-section" id="summarySection">
+            <div class="summary-header">
+                <h2>Resumen del Reporte</h2>
+                <p style="color: var(--color-text-secondary);">Información capturada en tiempo real</p>
+            </div>
+
+            <!-- User Card -->
+            <div class="user-card">
+                <h3 style="margin-bottom: var(--space-16); font-size: 1.1rem;">Información del Reportante</h3>
+                <div class="user-info">
+                    <div class="info-item">
+                        <span class="info-label">Nombre</span>
+                        <span class="info-value" id="summaryNombre"><span class="empty-value">Sin especificar</span></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Rol</span>
+                        <span class="info-value" id="summaryRol"><span class="empty-value">Sin especificar</span></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Institución</span>
+                        <span class="info-value"><span class="empty-value">I.E. Ejemplo</span></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Grado/Aula</span>
+                        <span class="info-value" id="summaryGrado"><span class="empty-value">Sin especificar</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimensions -->
+            <div class="dimensions-grid">
+                <!-- Conductual -->
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <span class="dimension-icon">🧠</span>
+                        <h3 class="dimension-title">Dimensión Conductual</h3>
+                    </div>
+                    <div class="dimension-items">
+                        <div class="dimension-item">
+                            <span class="item-label">Frecuencia</span>
+                            <span class="item-value" id="summaryFrecuencia"><span class="empty-value">-</span></span>
+                        </div>
+                        <div class="dimension-item">
+                            <span class="item-label">Tipo de agresión</span>
+                            <span class="item-value" id="summaryTipoAgresion"><span class="empty-value">-</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emocional -->
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <span class="dimension-icon">💛</span>
+                        <h3 class="dimension-title">Dimensión Emocional</h3>
+                    </div>
+                    <div class="dimension-items">
+                        <div class="dimension-item">
+                            <span class="item-label">Estados emocionales</span>
+                            <span class="item-value" id="summaryEstados"><span class="empty-value">-</span></span>
+                        </div>
+                        <div class="dimension-item">
+                            <span class="item-label">Riesgo de autolesión</span>
+                            <span class="item-value" id="summaryRiesgo"><span class="empty-value">-</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social -->
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <span class="dimension-icon">👥</span>
+                        <h3 class="dimension-title">Dimensión Social</h3>
+                    </div>
+                    <div class="dimension-items">
+                        <div class="dimension-item">
+                            <span class="item-label">Posición social</span>
+                            <span class="item-value" id="summaryPosicion"><span class="empty-value">-</span></span>
+                        </div>
+                        <div class="dimension-item">
+                            <span class="item-label">Tipo de agresor</span>
+                            <span class="item-value" id="summaryAgresor"><span class="empty-value">-</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cognitiva -->
+                <div class="dimension-card">
+                    <div class="dimension-header">
+                        <span class="dimension-icon">📚</span>
+                        <h3 class="dimension-title">Dimensión Cognitiva</h3>
+                    </div>
+                    <div class="dimension-items">
+                        <div class="dimension-item">
+                            <span class="item-label">Rendimiento académico</span>
+                            <span class="item-value" id="summaryRendimiento"><span class="empty-value">-</span></span>
+                        </div>
+                        <div class="dimension-item">
+                            <span class="item-label">Concentración</span>
+                            <span class="item-value" id="summaryConcentracion"><span class="empty-value">-</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Severity Indicator -->
+            <div class="severity-card" id="severityCard">
+                <div class="severity-level" id="severityLevel">Evaluando...</div>
+                <div class="severity-description" id="severityDescription">Completando información del reporte</div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn-outline" onclick="saveDraft()">Guardar Borrador</button>
+                <button class="btn-solid" onclick="showPreview()">Vista Previa</button>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Specialist Session -->
+    <div id="specialistSession" class="hidden">
+        <header class="header specialist-header">
+            <div class="logo">SociaiEye <span style="font-size: 0.7rem; font-weight: 500;">| Especialista</span></div>
+            <div class="header-user">
+                <span id="userName">Dr. Especialista</span>
+                <button class="btn btn-secondary" onclick="logout()">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div class="specialist-layout">
+            <!-- Sidebar -->
+            <aside class="specialist-sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="showDashboard(event)"><span>📋</span> Dashboard</a>
+                    <a href="#" class="nav-item" onclick="showCases(event)"><span>🔍</span> Casos Recientes</a>
+                    <a href="#" class="nav-item" onclick="showSociometricMap(event)"><span>🗺️</span> Mapa Sociométrico</a>
+                    <a href="#" class="nav-item" onclick="showAnalytics(event)"><span>📈</span> Análisis IA</a>
+                    <a href="#" class="nav-item" onclick="showReports(event)"><span>📊</span> Reportes</a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="specialist-main">
+                <!-- Dashboard View -->
+                <div id="dashboardView" class="specialist-view">
+                    <h1 class="view-title">Dashboard - Centro de Control</h1>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card critical">
+                            <div class="stat-icon">🔴</div>
+                            <div class="stat-info">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Casos Críticos</div>
+                            </div>
+                        </div>
+                        <div class="stat-card high">
+                            <div class="stat-icon">🟠</div>
+                            <div class="stat-info">
+                                <div class="stat-value">7</div>
+                                <div class="stat-label">Riesgo Moderado</div>
+                            </div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-icon">🟢</div>
+                            <div class="stat-info">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">Resueltos</div>
+                            </div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-info">
+                                <div class="stat-value">25</div>
+                                <div class="stat-label">Total Este Mes</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cases-table-container">
+                        <h2>Casos Recientes</h2>
+                        <table class="cases-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Grado</th>
+                                    <th>Severidad</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="casesTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sociometric Map View -->
+                <div id="sociometricView" class="specialist-view hidden">
+                    <h1 class="view-title">Mapa Sociométrico - Análisis de Red Social</h1>
+                    
+                    <div class="map-controls">
+                        <select class="form-control" id="gradeSelect" onchange="updateSociometricMap()">
+                            <option>5to Grado - Sección A</option>
+                            <option>5to Grado - Sección B</option>
+                            <option>6to Grado - Sección A</option>
+                        </select>
+                        <div class="map-filters">
+                            <label><input type="checkbox" id="filterCritical" onchange="updateSociometricMap()"> Solo críticos</label>
+                            <label><input type="checkbox" id="filterWitnesses" onchange="updateSociometricMap()"> Testigos</label>
+                            <label><input type="checkbox" id="filterMediators" onchange="updateSociometricMap()"> Mediadores</label>
+                        </div>
+                    </div>
+
+                    <div class="sociometric-container">
+                        <div class="map-canvas-wrapper">
+                            <canvas id="sociometricCanvas"></canvas>
+                            <div class="map-legend">
+                                <h3>Leyenda</h3>
+                                <div class="legend-item"><span class="legend-circle victim"></span> Víctima (aislado)</div>
+                                <div class="legend-item"><span class="legend-triangle aggressor"></span> Agresor</div>
+                                <div class="legend-item"><span class="legend-square witness"></span> Testigo</div>
+                                <div class="legend-item"><span class="legend-star leader"></span> Líder Positivo</div>
+                                <div class="legend-item"><span class="legend-hexagon mediator"></span> Mediador Potencial</div>
+                            </div>
+                        </div>
+
+                        <div class="map-analysis">
+                            <h3>Análisis de Red</h3>
+                            <div class="analysis-metrics">
+                                <div class="metric-item">
+                                    <span class="metric-label">📈 Centralidad más alta:</span>
+                                    <span class="metric-value">María G. (Líder positivo)</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">👥 Clústeres detectados:</span>
+                                    <span class="metric-value">4 grupos</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">🔗 Densidad de red:</span>
+                                    <span class="metric-value">62% conectividad</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">📍 Estudiantes aislados:</span>
+                                    <span class="metric-value warning">3 detectados</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">⚡ Patrones de agresión:</span>
+                                    <span class="metric-value critical">2 ciclos activos</span>
+                                </div>
+                            </div>
+
+                            <div class="ai-insights">
+                                <h4>🤖 Insights de IA</h4>
+                                <div class="insight-box">
+                                    <strong>Ciclo de violencia detectado:</strong> Carlos A. → Pedro M. → Luis R.
+                                </div>
+                                <div class="insight-box">
+                                    <strong>Víctimas silenciosas:</strong> 2 estudiantes sin reportes propios pero mencionados por otros.
+                                </div>
+                                <div class="insight-box success">
+                                    <strong>Mediadores recomendados:</strong> María G. y Ana S. tienen alta influencia positiva.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Analysis View -->
+                <div id="analyticsView" class="specialist-view hidden">
+                    <h1 class="view-title">Análisis Avanzado con IA</h1>
+                    
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>🔄 Ciclos de Violencia</h3>
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="cyclesChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>👑 Instigadores vs Ejecutores</h3>
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="rolesChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>📱 Influencia Digital</h3>
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="digitalChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>🚨 Predicción de Escalada</h3>
+                            <div class="prediction-list">
+                                <div class="prediction-item high">Caso #2301 - 85% probabilidad de escalada</div>
+                                <div class="prediction-item medium">Caso #2298 - 45% probabilidad de escalada</div>
+                                <div class="prediction-item low">Caso #2295 - 12% probabilidad de escalada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports View -->
+                <div id="reportsView" class="specialist-view hidden">
+                    <h1 class="view-title">Generación de Reportes</h1>
+                    <div class="reports-grid">
+                        <div class="report-card" onclick="generateReport('individual')">
+                            <div class="report-icon">📄</div>
+                            <h3>Reporte de Caso Individual</h3>
+                            <p>Análisis completo de un caso específico</p>
+                        </div>
+                        <div class="report-card" onclick="generateReport('period')">
+                            <div class="report-icon">📊</div>
+                            <h3>Análisis de Período</h3>
+                            <p>Estadísticas semanales o mensuales</p>
+                        </div>
+                        <div class="report-card" onclick="generateReport('institution')">
+                            <div class="report-icon">🏫</div>
+                            <h3>Estadísticas de Institución</h3>
+                            <p>Panorama completo del colegio</p>
+                        </div>
+                        <div class="report-card" onclick="generateReport('sociometric')">
+                            <div class="report-icon">🗺️</div>
+                            <h3>Mapa Sociométrico</h3>
+                            <p>Exportar visualización de red social</p>
+                        </div>
+                        <div class="report-card" onclick="generateReport('intervention')">
+                            <div class="report-icon">📋</div>
+                            <h3>Plan de Intervención</h3>
+                            <p>Recomendaciones personalizadas</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

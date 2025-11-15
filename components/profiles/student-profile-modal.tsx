@@ -3,36 +3,14 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
+import { getRiskLevel, getRiskColor, getDimensionColor, getProgressBarColor } from "@/lib/student-utils"
+import { StudentProfile } from "@/lib/student-types"
 
 interface StudentProfileModalProps {
   student: {
     id: string
     name: string
-    profile: {
-      conductual: {
-        status: "green" | "yellow" | "red"
-        incidentes: number
-        frecuencia: "baja" | "media" | "alta"
-        intensidad: "baja" | "media" | "alta"
-      }
-      emocional: {
-        score: number // 0-100
-        capacidadEmpatica: number // 0-100
-        autocontrol: number // 0-100
-      }
-      social: {
-        status: "green" | "yellow" | "red"
-        rol: "lider" | "aislado" | "puente" | "potencial_agresor"
-        relacionesPositivas: number
-        relacionesConflictivas: number
-        dominancia: boolean
-      }
-      cognitivo: {
-        percepcionDocente: "minimiza" | "neutral" | "rechaza"
-        nivelJustificacion: number // 0-100 (qué tan justifica el acoso)
-        creenciasAsociadas: string[]
-      }
-    }
+    profile: StudentProfile
   }
   isOpen: boolean
   onClose: () => void
@@ -41,33 +19,7 @@ interface StudentProfileModalProps {
 export function StudentProfileModal({ student, isOpen, onClose }: StudentProfileModalProps) {
   if (!isOpen) return null
 
-  const getDimensionColor = (status: "green" | "yellow" | "red") => {
-    switch (status) {
-      case "green":
-        return "bg-green-500/20 text-green-400 border-green-500/30"
-      case "yellow":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-      case "red":
-        return "bg-red-500/20 text-red-400 border-red-500/30"
-    }
-  }
-
-  const getRiskLevel = () => {
-    const riskFactors = [
-      student.profile.conductual.status === "red" ? 1 : student.profile.conductual.status === "yellow" ? 0.5 : 0,
-      student.profile.social.status === "red" ? 1 : student.profile.social.status === "yellow" ? 0.5 : 0,
-      student.profile.emocional.capacidadEmpatica < 40 ? 1 : student.profile.emocional.capacidadEmpatica < 70 ? 0.5 : 0,
-      student.profile.cognitivo.percepcionDocente === "minimiza"
-        ? 1
-        : student.profile.cognitivo.percepcionDocente === "neutral"
-          ? 0.5
-          : 0,
-    ]
-    const totalRisk = riskFactors.reduce((a, b) => a + b, 0) / riskFactors.length
-    return totalRisk > 0.7 ? "CRÍTICO" : totalRisk > 0.4 ? "ALTO" : totalRisk > 0.2 ? "MEDIO" : "BAJO"
-  }
-
-  const riskLevel = getRiskLevel()
+  const riskLevel = getRiskLevel(student.profile)
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -75,17 +27,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
         <div className="p-6 border-b border-slate-700 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white">{student.name}</h2>
-            <Badge
-              className={`mt-2 ${
-                riskLevel === "CRÍTICO"
-                  ? "bg-red-500/20 text-red-400 border-red-500/30"
-                  : riskLevel === "ALTO"
-                    ? "bg-orange-500/20 text-orange-400 border-orange-500/30"
-                    : riskLevel === "MEDIO"
-                      ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                      : "bg-green-500/20 text-green-400 border-green-500/30"
-              } border`}
-            >
+            <Badge className={`mt-2 ${getRiskColor(riskLevel)} border`}>
               Riesgo General: {riskLevel}
             </Badge>
           </div>
@@ -142,13 +84,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.score}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${
-                        student.profile.emocional.score >= 70
-                          ? "bg-green-500"
-                          : student.profile.emocional.score >= 40
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                      }`}
+                      className={`h-2 rounded-full ${getProgressBarColor(student.profile.emocional.score)}`}
                       style={{ width: `${student.profile.emocional.score}%` }}
                     ></div>
                   </div>
@@ -161,13 +97,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.capacidadEmpatica}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${
-                        student.profile.emocional.capacidadEmpatica >= 70
-                          ? "bg-green-500"
-                          : student.profile.emocional.capacidadEmpatica >= 40
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                      }`}
+                      className={`h-2 rounded-full ${getProgressBarColor(student.profile.emocional.capacidadEmpatica)}`}
                       style={{ width: `${student.profile.emocional.capacidadEmpatica}%` }}
                     ></div>
                   </div>
@@ -180,13 +110,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                   <p className="text-2xl font-bold text-white">{student.profile.emocional.autocontrol}</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${
-                        student.profile.emocional.autocontrol >= 70
-                          ? "bg-green-500"
-                          : student.profile.emocional.autocontrol >= 40
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                      }`}
+                      className={`h-2 rounded-full ${getProgressBarColor(student.profile.emocional.autocontrol)}`}
                       style={{ width: `${student.profile.emocional.autocontrol}%` }}
                     ></div>
                   </div>
@@ -251,13 +175,7 @@ export function StudentProfileModal({ student, isOpen, onClose }: StudentProfile
                   <p className="text-lg font-bold text-white">{student.profile.cognitivo.nivelJustificacion}%</p>
                   <div className="w-full bg-slate-600 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full ${
-                        student.profile.cognitivo.nivelJustificacion >= 70
-                          ? "bg-red-500"
-                          : student.profile.cognitivo.nivelJustificacion >= 40
-                            ? "bg-yellow-500"
-                            : "bg-green-500"
-                      }`}
+                      className={`h-2 rounded-full ${getProgressBarColor(student.profile.cognitivo.nivelJustificacion, true)}`}
                       style={{ width: `${student.profile.cognitivo.nivelJustificacion}%` }}
                     ></div>
                   </div>
