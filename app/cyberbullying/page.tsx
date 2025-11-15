@@ -3,9 +3,8 @@
 import { useState } from "react"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { AIChatbot } from "@/components/ai-chatbot/ai-chatbot"
-import { AlertTriangle, LinkIcon, MessageSquare, TrendingUp } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { AlertTriangle, LinkIcon, MessageSquare, TrendingUp, Shield, Eye, Calendar } from "lucide-react"
 
 interface IntegrationSource {
   id: string
@@ -115,163 +114,194 @@ export default function CyberbullyingAnalysis() {
       case "high":
         return "bg-red-500/20 text-red-400 border-red-500/30"
       case "medium":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+        return "bg-amber-500/20 text-amber-400 border-amber-500/30"
       case "low":
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30"
+        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
       default:
-        return "bg-slate-500/20 text-stone-400 border-stone-500/30"
+        return "bg-slate-500/20 text-slate-400 border-slate-500/30"
+    }
+  }
+
+  const getSeverityLabel = (severity: string) => {
+    switch (severity) {
+      case "high":
+        return "Alta"
+      case "medium":
+        return "Media"
+      case "low":
+        return "Baja"
+      default:
+        return severity
     }
   }
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 px-4 sm:px-0">
         {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Análisis de Ciberbullying</h1>
-          <p className="text-stone-400 text-sm sm:text-base">
+        <div className="border-b-2 border-amber-500 pb-3">
+          <h1 className="text-2xl sm:text-3xl font-bold text-amber-400">Análisis de Ciberbullying</h1>
+          <p className="text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base font-medium">
             Monitorea y analiza comportamientos de ciberbullying desde múltiples plataformas educativas
           </p>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="bg-stone-800 border-stone-700 p-4 sm:p-6">
+          <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-stone-400 text-xs sm:text-sm">Alertas Activas</p>
-                <p className="text-2xl sm:text-3xl font-bold text-white mt-2">{alerts.length}</p>
+                <p className="text-slate-400 text-xs sm:text-sm font-medium">Alertas Activas</p>
+                <p className="text-2xl sm:text-3xl font-bold text-red-400 mt-2">{alerts.length}</p>
               </div>
-              <AlertTriangle className="w-8 h-8 sm:w-10 sm:h-10 text-red-500" />
+              <div className="w-12 h-12 rounded-lg bg-red-500/20 flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-red-400" />
+              </div>
             </div>
           </Card>
 
-          <Card className="bg-stone-800 border-stone-700 p-4 sm:p-6">
+          <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-stone-400 text-xs sm:text-sm">Integraciones</p>
-                <p className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                <p className="text-slate-400 text-xs sm:text-sm font-medium">Integraciones</p>
+                <p className="text-2xl sm:text-3xl font-bold text-sky-400 mt-2">
                   {integrations.filter((i) => i.status === "connected").length}/{integrations.length}
                 </p>
               </div>
-              <LinkIcon className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
+              <div className="w-12 h-12 rounded-lg bg-sky-500/20 flex items-center justify-center">
+                <LinkIcon className="w-6 h-6 text-sky-400" />
+              </div>
             </div>
           </Card>
 
-          <Card className="bg-stone-800 border-stone-700 p-4 sm:p-6">
+          <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-stone-400 text-xs sm:text-sm">Severidad Alta</p>
-                <p className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                <p className="text-slate-400 text-xs sm:text-sm font-medium">Severidad Alta</p>
+                <p className="text-2xl sm:text-3xl font-bold text-amber-400 mt-2">
                   {alerts.filter((a) => a.severity === "high").length}
                 </p>
               </div>
-              <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-orange-500" />
+              <div className="w-12 h-12 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-amber-400" />
+              </div>
             </div>
           </Card>
 
-          <Card className="bg-stone-800 border-stone-700 p-4 sm:p-6">
+          <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-stone-400 text-xs sm:text-sm">Estudiantes Afectados</p>
-                <p className="text-2xl sm:text-3xl font-bold text-white mt-2">
+                <p className="text-slate-400 text-xs sm:text-sm font-medium">Estudiantes Afectados</p>
+                <p className="text-2xl sm:text-3xl font-bold text-violet-400 mt-2">
                   {new Set(alerts.map((a) => a.student)).size}
                 </p>
               </div>
-              <MessageSquare className="w-8 h-8 sm:w-10 sm:h-10 text-purple-500" />
+              <div className="w-12 h-12 rounded-lg bg-violet-500/20 flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-violet-400" />
+              </div>
             </div>
           </Card>
         </div>
 
         {/* Integrations Section */}
-        <div className="space-y-4">
-          <h2 className="text-lg sm:text-xl font-bold text-white">Integraciones Conectadas</h2>
+        <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
+            <Shield className="w-5 h-5 text-sky-400" />
+            Integraciones Conectadas
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {integrations.map((integration) => (
-              <Card key={integration.id} className="bg-stone-800 border-stone-700 p-4 sm:p-6">
+              <Card key={integration.id} className="border border-slate-700 bg-slate-900/50 p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3 flex-1 min-w-0">
                     <span className="text-2xl flex-shrink-0">{integration.icon}</span>
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-semibold text-white text-sm sm:text-base truncate">{integration.name}</h3>
-                      <p className="text-stone-400 text-xs sm:text-sm">{integration.platform}</p>
-                      <p className="text-stone-500 text-xs mt-1">Última sincronización: {integration.lastSync}</p>
+                      <h3 className="font-semibold text-slate-100 text-sm sm:text-base truncate">{integration.name}</h3>
+                      <p className="text-slate-400 text-xs sm:text-sm">{integration.platform}</p>
+                      <p className="text-slate-500 text-xs mt-1">Última sincronización: {integration.lastSync}</p>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-2 flex-shrink-0 ml-2">
-                    <span
-                      className={`px-2 py-1 rounded text-xs font-medium ${
+                  <div className="flex flex-col items-end gap-3 flex-shrink-0 ml-2">
+                    <Badge
+                      className={`${
                         integration.status === "connected"
-                          ? "bg-green-500/20 text-green-400"
-                          : "bg-slate-500/20 text-stone-400"
-                      }`}
+                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                          : "bg-slate-500/20 text-slate-400 border-slate-500/30"
+                      } border text-xs`}
                     >
                       {integration.status === "connected" ? "Conectado" : "Desconectado"}
-                    </span>
-                    <Button
+                    </Badge>
+                    {/* Toggle Switch */}
+                    <button
                       onClick={() => toggleIntegration(integration.id)}
-                      variant="outline"
-                      size="sm"
-                      className="border-stone-600 text-stone-300 hover:bg-stone-700 text-xs"
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+                        integration.status === "connected" ? "bg-emerald-500" : "bg-slate-600"
+                      }`}
                     >
-                      {integration.status === "connected" ? "Desconectar" : "Conectar"}
-                    </Button>
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
+                          integration.status === "connected" ? "translate-x-6" : "translate-x-1"
+                        }`}
+                      />
+                    </button>
                   </div>
                 </div>
               </Card>
             ))}
           </div>
-        </div>
+        </Card>
 
         {/* Alerts Section */}
-        <div className="space-y-4">
-          <h2 className="text-lg sm:text-xl font-bold text-white">Alertas de Ciberbullying Detectadas</h2>
-          <div className="space-y-3">
+        <Card className="border border-slate-600 bg-slate-800/50 p-4 sm:p-6">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-red-400" />
+            Alertas de Ciberbullying Detectadas
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {alerts.map((alert) => (
-              <Card key={alert.id} className={`border p-4 sm:p-6 ${getSeverityColor(alert.severity)}`}>
+              <Card key={alert.id} className="border border-slate-700 bg-slate-900/70 p-4 hover:border-amber-500/50 transition-all cursor-pointer group">
                 <div className="space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                  <div className="flex items-start justify-between">
                     <div className="min-w-0 flex-1">
-                      <h3 className="font-semibold text-sm sm:text-base truncate">{alert.student}</h3>
-                      <p className="text-xs sm:text-sm opacity-90 mt-1">{alert.type}</p>
+                      <h3 className="font-semibold text-slate-100 text-sm sm:text-base truncate group-hover:text-amber-300 transition-colors">{alert.student}</h3>
+                      <p className="text-slate-400 text-xs sm:text-sm mt-1">{alert.type}</p>
                     </div>
-                    <span className="text-xs font-medium flex-shrink-0">{alert.timestamp}</span>
+                    <Badge className={`${getSeverityColor(alert.severity)} border text-xs`}>
+                      {getSeverityLabel(alert.severity)}
+                    </Badge>
                   </div>
 
-                  <div className="bg-black/20 rounded p-2 sm:p-3">
-                    <p className="text-xs sm:text-sm">{alert.content}</p>
+                  <Card className="border border-slate-700 bg-slate-800/50 p-3">
+                    <p className="text-xs sm:text-sm text-slate-300">{alert.content}</p>
+                  </Card>
+
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2 text-slate-400">
+                      <LinkIcon className="w-3 h-3" />
+                      <span>Fuente: <span className="text-slate-300">{alert.source}</span></span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-400">
+                      <Calendar className="w-3 h-3" />
+                      <span>{alert.timestamp}</span>
+                    </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-2 border-t border-current/20">
-                    <div className="flex items-center gap-2 text-xs sm:text-sm">
-                      <span className="opacity-75">Fuente:</span>
-                      <span className="font-medium">{alert.source}</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-current/30 text-current hover:bg-current/10 text-xs bg-transparent"
-                      >
-                        Ver Detalles
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-current/30 text-current hover:bg-current/10 text-xs bg-transparent"
-                      >
-                        Generar Cita
-                      </Button>
-                    </div>
+                  <div className="flex gap-2 pt-3 border-t border-slate-700">
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-all text-xs font-medium">
+                      <Eye className="w-3 h-3" />
+                      Ver Detalles
+                    </button>
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-all text-xs font-medium">
+                      <Calendar className="w-3 h-3" />
+                      Generar Cita
+                    </button>
                   </div>
                 </div>
               </Card>
             ))}
           </div>
-        </div>
+        </Card>
       </div>
-
-      {/* AI Chatbot */}
     </DashboardLayout>
   )
 }
